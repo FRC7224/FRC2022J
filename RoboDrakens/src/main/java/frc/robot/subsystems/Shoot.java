@@ -13,6 +13,8 @@ import frc.robot.Constants;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Solenoid;
 
@@ -24,6 +26,7 @@ public class Shoot extends SubsystemBase {
     private Solenoid solenoidS;
     private WPI_TalonFX shootMotorTop;
     private WPI_TalonFX shootMotorBottom;
+    private WPI_VictorSPX elvMotor;
 
     /**
     *
@@ -31,6 +34,7 @@ public class Shoot extends SubsystemBase {
     public void setupShooter() {
         shootMotorTop = new WPI_TalonFX(5);
         shootMotorBottom = new WPI_TalonFX(6);
+        elvMotor = new WPI_VictorSPX(7);
         solenoidS = new Solenoid(0, PneumaticsModuleType.CTREPCM, 1);
         addChild("Solenoid S", solenoidS);
 
@@ -84,6 +88,16 @@ public class Shoot extends SubsystemBase {
         shootMotorTop.set(ControlMode.Velocity, topspeed);
         shootMotorBottom.set(ControlMode.Velocity, bottomspeed);
     }
+
+     /**
+      * sets the elevator speed
+      */
+      public void setelvSpeed(final double espeed) {
+        elvMotor.set(ControlMode.PercentOutput, espeed);
+   }
+
+
+
 
     @Override
     public void periodic() {

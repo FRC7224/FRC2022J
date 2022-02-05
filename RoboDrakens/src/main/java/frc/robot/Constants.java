@@ -92,4 +92,7 @@ public class Constants {
     public static double kshootBottomD = 20;
     public static double kshootBottomF = 1023.0 / 7200.0;
 
+    // Elevator
+    public static double kelvspeed = 0.5;
+
 }

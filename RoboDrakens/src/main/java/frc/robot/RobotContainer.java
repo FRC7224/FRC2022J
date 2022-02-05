@@ -12,8 +12,6 @@ import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.Chassis;
-import frc.robot.commands.ChassisTeleop;
-
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj.Joystick;
@@ -35,7 +33,7 @@ public class RobotContainer {
 
   // The robot's subsystems
   public final Shifter m_shifter = new Shifter();
-  // public final Intake m_intake = new Intake();
+  public final Intake m_intake = new Intake();
   public final Chassis m_chassis = new Chassis();
   public final Pneumatics m_pneumatics = new Pneumatics();
   public final Shoot m_shoot = new Shoot();
@@ -68,7 +66,11 @@ public class RobotContainer {
 
     // Configure default commands
     m_chassis.setDefaultCommand(new ChassisTeleop(m_chassis));
+    m_climb.setDefaultCommand(new ClimbControl(m_climb));
+    m_intake.setDefaultCommand(new IntakeAction(m_intake));
     m_pneumatics.setDefaultCommand(new PneumaticsControl(m_pneumatics));
+    m_shifter.setDefaultCommand(new ShifterControl(m_shifter));
+    m_shoot.setDefaultCommand(new ShootControl(m_shoot));
 
     // Configure autonomous sendable chooser
 

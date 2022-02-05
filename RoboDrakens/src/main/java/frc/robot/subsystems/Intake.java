@@ -29,7 +29,7 @@ public class Intake extends SubsystemBase {
      * sets the ball intake motor speed -1 to +1
      */
     public void setIntakeMotor(double ispeed) {
-        intakemotor = new WPI_VictorSPX(7);
+        intakemotor = new WPI_VictorSPX(8);
         intakemotor.set(ControlMode.PercentOutput, ispeed);
     }
 
@@ -37,7 +37,7 @@ public class Intake extends SubsystemBase {
      * sets the ball intake motor speed -1 to +1
      */
     public void setConveyorMotor(double conspeed) {
-        conveyormotor = new WPI_VictorSPX(8);
+        conveyormotor = new WPI_VictorSPX(9);
         conveyormotor.set(ControlMode.PercentOutput, conspeed);
     }
 
