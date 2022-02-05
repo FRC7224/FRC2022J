@@ -307,4 +307,22 @@ public class Chassis extends PIDSubsystem {
         Constants.gyroPIDOutput = output;
     }
 
+/**
+      * Simple method to drive the robot like a tank
+      * 
+      */
+      public void tankDrive(double leftValue, double rightValue) {
+
+        /**
+         * boolean squaredInputs = false; leftValue = limit(leftValue); rightValue =
+         * limit(rightValue); if (squaredInputs) { leftValue *= leftValue; } else {
+         * leftValue = -(leftValue * leftValue); } if (rightValue >= 0.0D) { rightValue
+         * *= rightValue; } else { rightValue = -(rightValue * rightValue); }
+         */
+        setLeftRightMotorOutputs(leftValue, rightValue);
+   }
+
+
+
+
 }

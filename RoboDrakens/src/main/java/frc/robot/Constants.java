@@ -49,6 +49,11 @@ public class Constants {
     public static double kshiftRateDown = 800;
     public static boolean shiftOpenState = false;
 
+       // Autonomous
+       public static int TrajectorySegments;
+       public static boolean isTrajectory = false;
+       public static int kencodermode = 0;
+
     // Climb
     public static double kClimbSpeed = 0.1;
     public static double kmaxClimbSpeed = 1.0;
