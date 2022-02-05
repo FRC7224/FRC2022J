@@ -8,40 +8,37 @@
 // update. Deleting the comments indicating the section will prevent
 // it from being updated in the future.
 
-
 package frc.robot;
 
 /**
- * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
- * constants.  This class should not be used for any other purpose.  All constants should be
- * declared globally (i.e. public static).  Do not put anything functional in this class.
+ * The Constants class provides a convenient place for teams to hold robot-wide
+ * numerical or boolean
+ * constants. This class should not be used for any other purpose. All constants
+ * should be
+ * declared globally (i.e. public static). Do not put anything functional in
+ * this class.
  *
- * <p>It is advised to statically import this class (or one of its inner classes) wherever the
+ * <p>
+ * It is advised to statically import this class (or one of its inner classes)
+ * wherever the
  * constants are needed, to reduce verbosity.
  */
 public class Constants {
-   /**
-    * public static final class DriveConstants {
-    *   public static final int kLeftMotor1Port = 0;
-    *   public static final int kLeftMotor2Port = 1;
-    *   public static final int kRightMotor1Port = 2;
-    *   public static final int kRightMotor2Port = 3; 
-    * }
+    /**
+    
     */
     // Joystick 1 constants
     public static double kdeadzone = 0.1; // Deadzone
     public static int kinitShooter = 1;
     public static int kshiftbutton = 2;
-    public static int kintakeinbutton = 9;
-    public static int kintakeoutbutton = 4;
-    public static int kwheelgraboutbutton = 9;
+    public static int kintakebutton = 9;
     public static int zonedown = 6;
-    public static int kWinchButtonA = 10;
+    public static int kclimbButton = 10;
     public static int zoneup = 5;
     public static int kpreButton = 7;
     public static int kShootOverideButton = 8;
 
-     // Chassis
+    // Chassis
     public static boolean kenablePID = true;
     public static double kp = 0.0002; // .005 0.012
     public static double ki = 0.0; // .1 0.0025
@@ -50,7 +47,49 @@ public class Constants {
     public static double gyroPIDOutput = 0.0;
     public static double kshiftRateUp = 1200;
     public static double kshiftRateDown = 800;
-    public static boolean shiftOpenState = false;    
+    public static boolean shiftOpenState = false;
+
+    // Climb
+    public static double kClimbSpeed = 0.1;
+    public static double kmaxClimbSpeed = 1.0;
+    public static double kminClimbpeed = 0.0;
+    public static boolean ClimbState = false;
+
+    // Intake
+    public static double kIntakeSpeed = 0.7;
+    public static double kConveyorSpeed = 0.7;
+
+    // Shooter Constants
+    public static int zone = 4;
+    public static double zone1shootertargetspeedTop = 8333;
+    public static double zone1shootertargetspeedBottom = 25000;
+    public static double zone2shootertargetspeedTop = 5000;
+    public static double zone2shootertargetspeedBottom = 15000;
+    public static double zone3shootertargetspeedTop = 1000;
+    public static double zone3shootertargetspeedBottom = 15000;
+    public static double zone4shootertargetspeedTop = 3000;
+    public static double zone4shootertargetspeedBottom = 9000;
+    public static double z1shootspeedtop = zone1shootertargetspeedTop;
+    public static double z1shootspeedbottom = zone1shootertargetspeedBottom;
+    public static double z2shootspeedtop = zone2shootertargetspeedTop;
+    public static double z2shootspeedbottom = zone2shootertargetspeedBottom;
+    public static double z3shootspeedtop = zone3shootertargetspeedTop;
+    public static double z3shootspeedbottom = zone3shootertargetspeedBottom;
+    public static double z4shootspeedtop = zone4shootertargetspeedTop;
+    public static double z4shootspeedbottom = zone4shootertargetspeedBottom;
+    public static double shooterTolerance = 300.0;
+    public static double shooterTimer_timer = 1.2;
+    public static boolean shooterMode = false;
+    public static int kPIDLoopIdx = 0;
+    public static int kTimeoutMs = 30;
+    public static double kshootTopP = 0.25;
+    public static double kshootTopI = 0.001;
+    public static double kshootTopD = 20;
+    public static double kshootTopF = 1023.0 / 7200.0;
+    //
+    public static double kshootBottomP = 0.25;
+    public static double kshootBottomI = 0.001;
+    public static double kshootBottomD = 20;
+    public static double kshootBottomF = 1023.0 / 7200.0;
 
 }
-
