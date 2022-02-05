@@ -13,13 +13,11 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 
 
 import frc.robot.subsystems.Chassis;
-import frc.robot.subsystems.Chassis;
 import java.io.File;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import org.opencv.core.Point;
-
+import frc.robot.Point;
 import frc.robot.Robot;
 import frc.robot.Constants;
 import frc.robot.commands.*;
@@ -37,41 +35,38 @@ import jaci.pathfinder.modifiers.TankModifier;
  *
  */
 public class AutonomousCmdTrajectoryFollowerFileGenerator extends CommandBase {
-
-    private final Chassis m_chassis;
-
-    public AutonomousCmdTrajectoryFollowerFileGenerator(Chassis subsystem) {
-
-        m_chassis = subsystem;
-        addRequirements(m_chassis);
-
-    }
-
-    public AutonomousCmdTrajectoryFollowerFileGenerator(Point startPoint, Point endPoint, String fileName) {
-      waypoints[0] = new Waypoint(startPoint.X * inchesToMeter, 
+ 
+ 
+  public AutonomousCmdTrajectoryFollowerFileGenerator( Chassis subsystem,Point startPoint, Point endPoint, String fileName) {
+    m_chassis = subsystem;
+    addRequirements(m_chassis);
+         
+    waypoints[0] = new Waypoint(startPoint.X * inchesToMeter, 
       startPoint.Y * inchesToMeter, Math.toRadians(startPoint.D));
     waypoints[1] = new Waypoint(endPoint.X * inchesToMeter, 
       endPoint.Y * inchesToMeter, Math.toRadians(endPoint.D));
     FileName = fileName;
-
-  edu.wpi.first.wpilibj.Timer timeout;
-  Timer t;
-  int gyrowait;
-  double lasttime;
-  double timelapse;
-  String FileName;
-  EncoderFollower left;
-  EncoderFollower right;
-  private static double inchesToMeter = 0.0254;
-  // This has a max size of three
-  Waypoint[] waypoints = new Waypoint[2];
-
-
   }
 
+    edu.wpi.first.wpilibj.Timer timeout;
+    Timer t;
+    int gyrowait;
+    double lasttime;
+    double timelapse;
+    String FileName;
+    EncoderFollower left;
+    EncoderFollower right;
+    private static double inchesToMeter = 0.0254;
+    // This has a max size of three
+    Waypoint[] waypoints = new Waypoint[2];
+    private final Chassis m_chassis;
+   
+
+
+    
 
   @Override
-  protected void initialize() {
+public void initialize() {
     // SmartDashboard.putNumber("files writer", 0);
     // int startindex = Constants.startPositionChooser;
     // waypoints[0] = new Waypoint (0,0,0);
@@ -235,14 +230,16 @@ public class AutonomousCmdTrajectoryFollowerFileGenerator extends CommandBase {
 
   }
 
+
+
   @Override
-  protected void execute() {
+public void execute() {
   }
 
 
 
   @Override
-  protected boolean isFinished() {
+  public boolean isFinished() {
     if (left.isFinished() || right.isFinished() || timeout.get() > 11) {
       m_chassis.resetEncoders();
       return true;
@@ -251,7 +248,7 @@ public class AutonomousCmdTrajectoryFollowerFileGenerator extends CommandBase {
   }
 
   @Override
-  protected void end() {
+  public void end(boolean interrupted) {
     timeout.stop();
     timeout.reset();
     t.cancel();
@@ -259,10 +256,13 @@ public class AutonomousCmdTrajectoryFollowerFileGenerator extends CommandBase {
     m_chassis.brakemode(false);
   }
 
-  @Override
-  protected void interrupted() {
-    end();
+        
 
-  }
+    @Override
+    public boolean runsWhenDisabled() {
+
+        return false;
+
+    }
 
 }
