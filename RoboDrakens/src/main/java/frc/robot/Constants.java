@@ -39,10 +39,48 @@ public class Constants {
     public static int kShootOverideButton = 8;
 
     // Chassis
+    public static int kRightMotor1Port = 1;
+    public static int kRightMotor2Port = 2;
+    public static int kLeftMotor1Port = 3;
+    public static int kLeftMotor2Port = 4;
+
+
+    public static final int[] kLeftEncoderPorts = new int[] {2, 3};
+    public static final int[] kRightEncoderPorts = new int[] {0, 1};
+    public static final boolean kLeftEncoderReversed = false;
+    public static final boolean kRightEncoderReversed = true;
+
+    public static final int kEncoderCPR = 1024;
+    public static final double kWheelDiameterInches = 4;
+    public static final double kEncoderDistancePerPulse =
+        // Assumes the encoders are directly mounted on the wheel shafts
+        (kWheelDiameterInches * Math.PI) / (double) kEncoderCPR;
+
+    public static final boolean kGyroReversed = false;
+
+    public static final double kStabilizationP = 1;
+    public static final double kStabilizationI = 0.5;
+    public static final double kStabilizationD = 0;
+
+    public static final double kTurnP = 1;
+    public static final double kTurnI = 0;
+    public static final double kTurnD = 0;
+
+    public static final double kMaxTurnRateDegPerS = 100;
+    public static final double kMaxTurnAccelerationDegPerSSquared = 300;
+
+    public static final double kTurnToleranceDeg = 5;
+    public static final double kTurnRateToleranceDegPerS = 10; // degrees per second
+
+
+
+
+
+    
     public static boolean kenablePID = true;
-    public static double kp = 0.0002; // .005 0.012
-    public static double ki = 0.0; // .1 0.0025
-    public static double kd = 0.05; // .1
+    public static double kp = 0.1; // .005 0.012
+    public static double ki = 0.01; // .1 0.0025
+    public static double kd = 0.005; // .1
     public static double kgyroPIDErrorTolerance = 1.0; // in degrees
     public static double gyroPIDOutput = 0.0;
     public static double kshiftRateUp = 1200;
@@ -99,5 +137,11 @@ public class Constants {
 
     // Elevator
     public static double kelvspeed = 0.5;
+
+
+// new pid control 
+
+
+
 
 }

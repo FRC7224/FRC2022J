@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-// ROBOTBUILDER TYPE: Command.
+
 
 package frc.robot.commands;
 
