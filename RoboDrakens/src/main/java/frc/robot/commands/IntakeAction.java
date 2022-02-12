@@ -10,7 +10,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
-import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.IntakeSubsystem;
 
 /**
  *
@@ -18,13 +18,13 @@ import frc.robot.subsystems.Intake;
 public class IntakeAction extends CommandBase {
 
 
-        private final Intake m_intake;
+        private final IntakeSubsystem m_intakesubsystem;
  
 
-    public IntakeAction(Intake subsystem) {
+    public IntakeAction(IntakeSubsystem subsystem) {
 
-       m_intake = subsystem;
-        addRequirements(m_intake);
+       m_intakesubsystem = subsystem;
+        addRequirements(m_intakesubsystem);
 
     }
 
@@ -38,11 +38,11 @@ public class IntakeAction extends CommandBase {
     public void execute() {
         Joystick joystick1 = new Joystick(0);
         if (joystick1.getRawButton(Constants.kintakebutton)) { // Robot intake
-            m_intake.setIntakeMotor(Constants.kIntakeSpeed);   // Robot conveyor
-            m_intake.setConveyorMotor(Constants.kConveyorSpeed);
+            m_intakesubsystem.setIntakeMotor(Constants.kIntakeSpeed);   // Robot conveyor
+            m_intakesubsystem.setConveyorMotor(Constants.kConveyorSpeed);
         } else { // toggle off
-            m_intake.setIntakeMotor(0);    // Robot intake set ot 0
-            m_intake.setConveyorMotor(0);  // Robot conveyor set ot 0
+            m_intakesubsystem.setIntakeMotor(0);    // Robot intake set ot 0
+            m_intakesubsystem.setConveyorMotor(0);  // Robot conveyor set ot 0
             // Robot intake set ot 0
         }
     }

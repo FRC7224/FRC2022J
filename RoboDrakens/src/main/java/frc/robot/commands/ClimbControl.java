@@ -12,19 +12,19 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
-import frc.robot.subsystems.Climb;
+import frc.robot.subsystems.ClimbSubsystem;
 
 /**
  *
  */
 public class ClimbControl extends CommandBase {
 
-    private final Climb m_climb;
+    private final ClimbSubsystem m_climbsubsystem;
 
-    public ClimbControl(Climb m_climb2) {
+    public ClimbControl(ClimbSubsystem subsystem) {
 
-        m_climb = m_climb2;
-        addRequirements(m_climb);
+        m_climbsubsystem = subsystem;
+        addRequirements(m_climbsubsystem);
 
     }
 
@@ -38,9 +38,9 @@ public class ClimbControl extends CommandBase {
     public void execute() {
         Joystick joystick1 = new Joystick(0);
         if (joystick1.getRawButton(Constants.kclimbButton)) { // Robot climb
-            m_climb.climbMotorControl(Constants.kClimbSpeed);
+            m_climbsubsystem.climbMotorControl(Constants.kClimbSpeed);
         } else { // toggle off
-            m_climb.climbMotorControl(0);
+            m_climbsubsystem.climbMotorControl(0);
             // Robot cliomb set ot 0
         }
 

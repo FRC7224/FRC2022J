@@ -11,19 +11,19 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
-import frc.robot.subsystems.Shifter;
+import frc.robot.subsystems.ShifterSubsystem;
 
 /**
  *
  */
 public class ShifterControl extends CommandBase {
 
-    private final Shifter m_shifter;
+    private final ShifterSubsystem m_shiftersubsystem;
 
-    public ShifterControl(Shifter subsystem) {
+    public ShifterControl(ShifterSubsystem subsystem) {
 
-        m_shifter = subsystem;
-        addRequirements(m_shifter);
+        m_shiftersubsystem = subsystem;
+        addRequirements(m_shiftersubsystem);
 
     }
 
@@ -38,10 +38,10 @@ public class ShifterControl extends CommandBase {
 
         Joystick joystick1 = new Joystick(0);  // swicth to high gear
         if (joystick1.getRawButton(Constants.kshiftbutton)) {
-            m_shifter.shiftHigh();
+            m_shiftersubsystem.shiftHigh();
             Constants.shiftOpenState = true;
         } else { // toggle off
-            m_shifter.shiftLow();
+            m_shiftersubsystem.shiftLow();
             Constants.shiftOpenState = false;
         }
 

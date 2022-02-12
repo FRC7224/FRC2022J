@@ -21,7 +21,7 @@ import edu.wpi.first.wpilibj.Solenoid;
 /**
  *
  */
-public class Shoot extends SubsystemBase {
+public class ShootSubsystem extends SubsystemBase {
 
     private Solenoid solenoidS;
     private WPI_TalonFX shootMotorTop;

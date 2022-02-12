@@ -18,7 +18,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 /**
  *
  */
-public class Intake extends SubsystemBase {
+public class IntakeSubsystem extends SubsystemBase {
 
     private WPI_VictorSPX intakemotor;
     private WPI_VictorSPX conveyormotor;

@@ -9,7 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
-import frc.robot.subsystems.Shoot;
+import frc.robot.subsystems.ShootSubsystem;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -19,21 +19,21 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class ShootControl extends CommandBase {
 
-    private final Shoot m_shoot;
+    private final ShootSubsystem m_shootsubsystem;
     // Used for Button Toggle Code
     private final Timer timer = new Timer();
 
-    public ShootControl(Shoot subsystem) {
+    public ShootControl(ShootSubsystem subsystem) {
 
-        m_shoot = subsystem;
-        addRequirements(m_shoot);
+        m_shootsubsystem = subsystem;
+        addRequirements(m_shootsubsystem);
 
     }
 
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-        m_shoot.setupShooter();
+        m_shootsubsystem.setupShooter();
         Constants.shooterMode = false;
         timer.start();
 
@@ -96,18 +96,18 @@ public class ShootControl extends CommandBase {
             if (timer.get() <= timetorun) {
                 SmartDashboard.putNumber("shoot mode inside ", timetorun);
                 SmartDashboard.putNumber("timer ", timer.get());
-                m_shoot.setShootSpeed(motorspeedTop, motorspeedBottom);
+                m_shootsubsystem.setShootSpeed(motorspeedTop, motorspeedBottom);
 
             } else {
-                m_shoot.setShootSpeed(motorspeedTop, motorspeedBottom);
-                m_shoot.setelvSpeed(Constants.kelvspeed);
+                m_shootsubsystem.setShootSpeed(motorspeedTop, motorspeedBottom);
+                m_shootsubsystem.setelvSpeed(Constants.kelvspeed);
                  SmartDashboard.putNumber("shoot mode else ", timetorun);
             }
         } else
 
         {
-            m_shoot.setShootSpeed(0, 0);
-            m_shoot.setelvSpeed(0);
+            m_shootsubsystem.setShootSpeed(0, 0);
+            m_shootsubsystem.setelvSpeed(0);
             timer.reset();
         }
 

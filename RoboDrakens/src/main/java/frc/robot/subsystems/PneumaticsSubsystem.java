@@ -16,14 +16,14 @@ import edu.wpi.first.wpilibj.PneumaticsModuleType;
 /**
  *
  */
-public class Pneumatics extends SubsystemBase {
+public class PneumaticsSubsystem extends SubsystemBase {
 
     private Compressor compressor;
 
     /**
     *
     */
-    public Pneumatics() {
+    public PneumaticsSubsystem() {
 
         compressor = new Compressor(0, PneumaticsModuleType.CTREPCM);
         addChild("Compressor 1", compressor);

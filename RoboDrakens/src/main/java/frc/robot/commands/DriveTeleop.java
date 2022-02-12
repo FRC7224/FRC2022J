@@ -5,8 +5,6 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-
-
 package frc.robot.commands;
 
 import edu.wpi.first.math.controller.PIDController;
@@ -14,47 +12,46 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.DriveSubsystem;
-import edu.wpi.first.wpilibj2.command.PIDCommand;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 
 /** A command that will turn the robot to the specified angle. */
-public class DriveTeleop extends PIDCommand {
+public class DriveTeleop extends CommandBase
 
-  
-   
+{
+
+    private final DriveSubsystem m_drivesubsystem;
+
     private boolean firstpassturning = true;
     Timer setPointTimer = new Timer();
+    public PIDController drivepid;
 
     /**
-     * Turns to robot to the specified angle.
+     * 
      *
-     * @param targetAngleDegrees The angle to turn to
-     * @param drive              The drive subsystem to use
+     * 
+     * 
      */
-    public DriveTeleop( DriveSubsystem m_drive) {
-        super(
-                new PIDController(Constants.kTurnP, Constants.kTurnI, Constants.kTurnD),
-                // Close loop on heading
-                m_drive::getHeading,
-                // Set reference to target
-                0,
-                // Pipe output to turn robot
-                output -> m_drive.setGyroPIDoutput(output),
-                // Require the drive
-                m_drive);
+    public DriveTeleop(DriveSubsystem subsystem) {
 
+        drivepid = new PIDController(Constants.kTurnP, Constants.kTurnI, Constants.kTurnD, 20);
         // Set the controller to be continuous (because it is an angle controller)
-        getController().enableContinuousInput(-180, 180);
+        drivepid.enableContinuousInput(-180, 180);
         // Set the controller tolerance - the delta tolerance ensures the robot is
         // stationary at the
         // setpoint before it is considered as having reached the reference
-        getController().setTolerance(Constants.kTurnToleranceDeg, Constants.kTurnRateToleranceDegPerS);
+        drivepid.setTolerance(Constants.kTurnToleranceDeg);
 
-       
+        m_drivesubsystem = subsystem;
+        addRequirements(m_drivesubsystem);
 
+    }
+
+    @Override
+    public void execute() {
         Joystick joystick1 = new Joystick(0);
-        double forward = -m_drive.deadZone(joystick1.getY()); // forward
-        double turn = -m_drive.deadZone(joystick1.getX()); // turn
+        double forward = -m_drivesubsystem.deadZone(joystick1.getY()); // forward
+        double turn = -m_drivesubsystem.deadZone(joystick1.getX()); // turn
         if (forward >= 0) {
             forward = forward * forward;
         } else {
@@ -69,10 +66,7 @@ public class DriveTeleop extends PIDCommand {
         SmartDashboard.putNumber("turn", turn);
         SmartDashboard.putNumber("x", joystick1.getX());
         SmartDashboard.putNumber("y", joystick1.getY());
-        m_drive.autoshift();
-        m_drive.arcadeDrive(forward, turn);
-        m_drive.displayChasisData();
-
+        m_drivesubsystem.autoshift();
         if (Constants.kenablePID == true) { // use PID process
             // **********************************************************
             // * PID Assit Driving Proccessing
@@ -82,7 +76,7 @@ public class DriveTeleop extends PIDCommand {
             if (turn == 0.0) { // *** Not turning ****
                 if (firstpassturning == true) { // Code is called first time, when we stopped turning
                     setPointTimer.start();
-                    m_drive.zeroHeading();
+                    m_drivesubsystem.zeroHeading();
                     firstpassturning = false; // Set turning to false, because we are not
                                               // turning any more
                 } else if (setPointTimer.get() != 0) {// settle timer reached
@@ -92,33 +86,35 @@ public class DriveTeleop extends PIDCommand {
                         setPointTimer.reset();
                     }
                 } else { // after settling ** Driving straight using PID
-                    turn = Constants.gyroPIDOutput;
+                    // turn = Constants.gyroPIDOutput;
+                    turn = drivepid.calculate(m_drivesubsystem.getHeading(), 0);
                 }
                 // ELSE the user is still commanding
                 // User is commanding a turn
             } else { // (turn != 0.0)
                 // SmartDashboard.putNumber("turn in elseif",turn );
-                 setPointTimer.stop();
+                setPointTimer.stop();
                 setPointTimer.reset();
                 firstpassturning = true;
                 // Reset angle
             }
-            m_drive.displayChasisData();
-            m_drive.arcadeDrive(forward, turn); // PID controlled Drive
+            m_drivesubsystem.displayChasisData();
+            m_drivesubsystem.arcadeDrive(forward, turn); // PID controlled Drive
         } // End of BasicDrive PID Control
           // ELSE PID is Off
         else { // use standard arcadeDrive
                // * PID off mode *****
-            m_drive.displayChasisData();
-            m_drive.arcadeDrive(forward, turn);
+            m_drivesubsystem.displayChasisData();
+            m_drivesubsystem.arcadeDrive(forward, turn);
         }
         // End of PID enable loop\
+
     }
 
     @Override
     public boolean isFinished() {
         // End when the controller is at the reference.
-        return getController().atSetpoint();
+        return false;
     }
 
     @Override
