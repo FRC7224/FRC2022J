@@ -23,21 +23,19 @@ import edu.wpi.first.wpilibj.Solenoid;
  */
 public class ShootSubsystem extends SubsystemBase {
 
-    private Solenoid solenoidS;
-    private WPI_TalonFX shootMotorTop;
-    private WPI_TalonFX shootMotorBottom;
-    private WPI_VictorSPX elvMotor;
+
+    private WPI_TalonFX shootMotorTop= new WPI_TalonFX(5);
+    private WPI_TalonFX shootMotorBottom = new WPI_TalonFX(6);
+    private WPI_VictorSPX elvMotor = new WPI_VictorSPX(7);
+    private Solenoid solenoidS = new Solenoid(0, PneumaticsModuleType.CTREPCM, 1);
 
     /**
     *
     */
     public void setupShooter() {
-        shootMotorTop = new WPI_TalonFX(5);
+ 
         addChild("Shoot Motor Top", shootMotorTop );
-        shootMotorBottom = new WPI_TalonFX(6);
         addChild("Shoot Motor Bottom", shootMotorBottom );
-        elvMotor = new WPI_VictorSPX(7);
-        solenoidS = new Solenoid(0, PneumaticsModuleType.CTREPCM, 1);
         addChild("Solenoid S", solenoidS);
         
 

@@ -11,11 +11,9 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
-// import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
@@ -28,21 +26,27 @@ public class DriveSubsystem extends SubsystemBase {
   // private WPI_TalonFX right1; // right 1
   // private WPI_TalonFX right2; // right 2
   // private WPI_TalonFX left1; // left 1
-  // private WPI_TalonFX left2; // left 2
+ //  private WPI_TalonFX temp; // left 2
+   
+
+ WPI_TalonSRX left1 = new WPI_TalonSRX(Constants.kLeftMotor1Port);
+ WPI_TalonSRX left2 = new WPI_TalonSRX(Constants.kLeftMotor2Port);
+ WPI_TalonSRX right1 = new WPI_TalonSRX(Constants.kRightMotor1Port);
+ WPI_TalonSRX right2 = new WPI_TalonSRX(Constants.kRightMotor2Port);
+ 
 
   // The motors on the left side of the drive.
-  private final MotorControllerGroup m_leftMotors = new MotorControllerGroup(
-      new WPI_TalonSRX(Constants.kLeftMotor1Port),
-      new WPI_TalonSRX(Constants.kLeftMotor2Port));
+ MotorControllerGroup m_leftMotors = new MotorControllerGroup( left1, left2);
+
 
   // The motors on the right side of the drive.
-  private final MotorControllerGroup m_rightMotors = new MotorControllerGroup(
-      new WPI_TalonSRX(Constants.kRightMotor1Port),
-      new WPI_TalonSRX(Constants.kRightMotor2Port));
+  MotorControllerGroup m_rightMotors = new MotorControllerGroup(right1,right2);
+
+     
 
   // The robot's drive
   private final DifferentialDrive m_drive = new DifferentialDrive(m_leftMotors, m_rightMotors);
-
+  
   // The left-side drive encoder
   private final Encoder m_leftEncoder = new Encoder(
       Constants.kLeftEncoderPorts[0],
@@ -181,7 +185,7 @@ public class DriveSubsystem extends SubsystemBase {
    * @return The turn rate of the robot, in degrees per second
    */
   public double getTurnRate() {
-    SmartDashboard.putNumber("***get pid turnrate", m_gyro.getRate() * (Constants.kGyroReversed ? -1.0 : 1.0));
+    SmartDashboard.putNumber("PID drive turnrate", m_gyro.getRate() * (Constants.kGyroReversed ? -1.0 : 1.0));
     return m_gyro.getRate() * (Constants.kGyroReversed ? -1.0 : 1.0);
   }
 
@@ -197,13 +201,15 @@ public class DriveSubsystem extends SubsystemBase {
 
   public void brakemode(boolean brakemode) {
     if (brakemode) {
-      // m_leftMotors.setNeutralMode(NeutralMode.Brake);
-      // m_rightMotors.setNeutralMode(NeutralMode.Brake);
-
+       left1.setNeutralMode(NeutralMode.Brake);
+       left2.setNeutralMode(NeutralMode.Brake);
+       right1.setNeutralMode(NeutralMode.Brake);
+       right2.setNeutralMode(NeutralMode.Brake);
     } else {
-      // m_leftMotors.setNeutralMode(NeutralMode.Coast);
-      // m_rightMotors.setNeutralMode(NeutralMode.Coast);
-
+      left1.setNeutralMode(NeutralMode.Coast);
+      left2.setNeutralMode(NeutralMode.Coast);
+      right1.setNeutralMode(NeutralMode.Coast);
+      right2.setNeutralMode(NeutralMode.Coast);
     }
   }
 
