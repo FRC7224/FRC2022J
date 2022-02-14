@@ -59,7 +59,6 @@ public class DriveSubsystem extends SubsystemBase {
   private final Gyro m_gyro = new ADXRS450_Gyro();
 
   // Initialize your subsystem here
-
   public DriveSubsystem() {
 
     // We need to invert one side of the drivetrain so that positive voltages
@@ -67,9 +66,18 @@ public class DriveSubsystem extends SubsystemBase {
     // gearbox is constructed, you might have to invert the left side instead.
     m_rightMotors.setInverted(true);
 
+
     // Sets the distance per pulse for the encoders
     m_leftEncoder.setDistancePerPulse(Constants.kEncoderDistancePerPulse);
     m_rightEncoder.setDistancePerPulse(Constants.kEncoderDistancePerPulse);
+
+    // Setup live windoww items
+    addChild("Left Encoder", m_leftEncoder);
+    addChild("Right Encoder", m_rightEncoder);
+    addChild("Drive Subsytem", m_drive);
+    addChild("Left Motor", m_leftMotors);
+    addChild("Right Motor", m_rightMotors);
+
   }
 
   /**
@@ -122,7 +130,7 @@ public class DriveSubsystem extends SubsystemBase {
    * @return the raw left drive encoder
    */
   public int getLeftEncoderPosition() {
-    return m_leftEncoder.getFPGAIndex();
+    return m_leftEncoder.getRaw();
   }
 
   /**
@@ -140,7 +148,7 @@ public class DriveSubsystem extends SubsystemBase {
    * @return the right drive encoder
    */
   public int getRightEncoderPosition() {
-    return m_rightEncoder.getFPGAIndex();
+    return m_rightEncoder.getRaw();
   }
 
   /**
@@ -177,16 +185,7 @@ public class DriveSubsystem extends SubsystemBase {
     return m_gyro.getRate() * (Constants.kGyroReversed ? -1.0 : 1.0);
   }
 
-  /**
-   * Sets the output of the PID
-   *
-   * 
-   */
-  public void setGyroPIDoutput(double pidTurn) {
-    SmartDashboard.putNumber("***set pid turn", pidTurn);
-    Constants.gyroPIDOutput = pidTurn;
-    return;
-  }
+  
 
   // setup
   public void setupDrive() {
@@ -224,20 +223,13 @@ public class DriveSubsystem extends SubsystemBase {
     // }
   }
 
-  public void displayChasisData() {
+  public void displayDriveData() {
     // These are the new encoders
-    SmartDashboard.putNumber("LEFT ENCODER", m_leftEncoder.get());
-    SmartDashboard.putNumber("RIGTH ENCODER", m_rightEncoder.get());
-    SmartDashboard.putNumber("Chassis angle", m_gyro.getAngle());
-    // SmartDashboard.putNumber("Chassis PID
-    // setpoint",getController().getSetpoint()) ;
-    // SmartDashboard.putNumber("Chassis PID position
-    // error",getController().getPositionError()) ;
-    SmartDashboard.putNumber("Chassis turn PID  Output ", Constants.gyroPIDOutput);
-    SmartDashboard.putNumber("Drive Rate", m_leftEncoder.getRate());
-    // SmartDashboard.putBoolean("PID Enable ",
-    // getController().isContinuousInputEnabled());
-
+    SmartDashboard.putNumber("Left Encoder Scaled", getLeftEncoder().getDistance());
+    SmartDashboard.putNumber("Right Encoder Sclaed",getRightEncoder().getDistance());
+    SmartDashboard.putNumber("Left Encoder Raw",getLeftEncoderPosition());
+    SmartDashboard.putNumber("Right Encoder Raw",getRightEncoderPosition());;
+    SmartDashboard.putNumber("Chassis angle", getHeading());
   }
 
 }

@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.util.sendable.SendableRegistry;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -42,9 +43,13 @@ public class DriveTeleop extends CommandBase
         // setpoint before it is considered as having reached the reference
         drivepid.setTolerance(Constants.kTurnToleranceDeg);
 
+        SendableRegistry.setName(drivepid, "DriveSubsystem" ,"Drive Stabilize PID");
+        
+ 
         m_drivesubsystem = subsystem;
         addRequirements(m_drivesubsystem);
 
+    
     }
 
     @Override
@@ -88,6 +93,7 @@ public class DriveTeleop extends CommandBase
                 } else { // after settling ** Driving straight using PID
                     // turn = Constants.gyroPIDOutput;
                     turn = drivepid.calculate(m_drivesubsystem.getHeading(), 0);
+                    SmartDashboard.putNumber("Drive PID Output",turn);
                 }
                 // ELSE the user is still commanding
                 // User is commanding a turn
@@ -98,13 +104,13 @@ public class DriveTeleop extends CommandBase
                 firstpassturning = true;
                 // Reset angle
             }
-            m_drivesubsystem.displayChasisData();
+            m_drivesubsystem.displayDriveData();
             m_drivesubsystem.arcadeDrive(forward, turn); // PID controlled Drive
         } // End of BasicDrive PID Control
           // ELSE PID is Off
         else { // use standard arcadeDrive
                // * PID off mode *****
-            m_drivesubsystem.displayChasisData();
+            m_drivesubsystem.displayDriveData();
             m_drivesubsystem.arcadeDrive(forward, turn);
         }
         // End of PID enable loop\

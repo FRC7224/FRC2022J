@@ -33,10 +33,14 @@ public class ShootSubsystem extends SubsystemBase {
     */
     public void setupShooter() {
         shootMotorTop = new WPI_TalonFX(5);
+        addChild("Shoot Motor Top", shootMotorTop );
         shootMotorBottom = new WPI_TalonFX(6);
+        addChild("Shoot Motor Bottom", shootMotorBottom );
         elvMotor = new WPI_VictorSPX(7);
         solenoidS = new Solenoid(0, PneumaticsModuleType.CTREPCM, 1);
         addChild("Solenoid S", solenoidS);
+        
+
 
         /**
          * sets up shooter with PID

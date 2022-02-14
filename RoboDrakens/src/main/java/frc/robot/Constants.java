@@ -38,29 +38,26 @@ public class Constants {
     public static int kpreButton = 7;
     public static int kShootOverideButton = 8;
 
-    // Chassis
+    // Drive Subsystem
     public static int kRightMotor1Port = 1;
     public static int kRightMotor2Port = 2;
     public static int kLeftMotor1Port = 3;
     public static int kLeftMotor2Port = 4;
 
+    public static boolean kenablePID = true;
 
-    public static final int[] kLeftEncoderPorts = new int[] {2, 3};
-    public static final int[] kRightEncoderPorts = new int[] {0, 1};
+    public static final int[] kLeftEncoderPorts = new int[] { 2, 3 };
+    public static final int[] kRightEncoderPorts = new int[] { 0, 1 };
     public static final boolean kLeftEncoderReversed = false;
     public static final boolean kRightEncoderReversed = true;
 
     public static final int kEncoderCPR = 1024;
     public static final double kWheelDiameterInches = 4;
     public static final double kEncoderDistancePerPulse =
-        // Assumes the encoders are directly mounted on the wheel shafts
-        (kWheelDiameterInches * Math.PI) / (double) kEncoderCPR;
+            // Assumes the encoders are directly mounted on the wheel shafts
+            (kWheelDiameterInches * Math.PI) / (double) kEncoderCPR;
 
     public static final boolean kGyroReversed = false;
-
-    public static final double kStabilizationP = 1;
-    public static final double kStabilizationI = 0.5;
-    public static final double kStabilizationD = 0;
 
     public static final double kTurnP = .1;
     public static final double kTurnI = 0;
@@ -70,27 +67,17 @@ public class Constants {
     public static final double kMaxTurnAccelerationDegPerSSquared = 300;
 
     public static final double kTurnToleranceDeg = 2;
-   
 
+    // Shifter
 
-
-
-
-    
-    public static boolean kenablePID = true;
-    public static double kp = 0.1; // .005 0.012
-    public static double ki = 0.01; // .1 0.0025
-    public static double kd = 0.005; // .1
-    public static double kgyroPIDErrorTolerance = 1.0; // in degrees
-    public static double gyroPIDOutput = 0.0;
     public static double kshiftRateUp = 1200;
     public static double kshiftRateDown = 800;
     public static boolean shiftOpenState = false;
 
-       // Autonomous
-       public static int TrajectorySegments;
-       public static boolean isTrajectory = false;
-       public static int kencodermode = 0;
+    // Autonomous
+    public static int TrajectorySegments;
+    public static boolean isTrajectory = false;
+    public static int kencodermode = 0;
 
     // Climb
     public static double kClimbSpeed = 0.1;
@@ -102,7 +89,8 @@ public class Constants {
     public static double kIntakeSpeed = 0.7;
     public static double kConveyorSpeed = 0.7;
 
-    // Shooter Constants
+    // Shooter / Elevator Constants
+    public static double kelvspeed = 0.5;
     public static int zone = 4;
     public static double zone1shootertargetspeedTop = 8333;
     public static double zone1shootertargetspeedBottom = 25000;
@@ -134,13 +122,6 @@ public class Constants {
     public static double kshootBottomI = 0.001;
     public static double kshootBottomD = 20;
     public static double kshootBottomF = 1023.0 / 7200.0;
-
-    // Elevator
-    public static double kelvspeed = 0.5;
-
-
-// new pid control 
-
 
 
 
