@@ -23,12 +23,14 @@ public class IntakeSubsystem extends SubsystemBase {
 
     private WPI_VictorSPX intakemotor = new WPI_VictorSPX(8);
     private WPI_VictorSPX conveyormotor = new WPI_VictorSPX(9);
-    DigitalInput ballLoaded = new DigitalInput(Constants.kballloadport);
-    private Solenoid solenoidG = new Solenoid(0, PneumaticsModuleType.CTREPCM, Constants.kballsensorchannel);
+    DigitalInput ballLoaded = new DigitalInput(Constants.kballsensorchannel);
+    private Solenoid solenoidG = new Solenoid(0, PneumaticsModuleType.CTREPCM, Constants.kPneumaticsShootGate);
+    private Solenoid solenoidI = new Solenoid(0, PneumaticsModuleType.CTREPCM, Constants.kPneumaticsIntake);
 
     public IntakeSubsystem() {
 
-        addChild("Solenoid G", solenoidG);
+        addChild("Solenoid Gate", solenoidG);
+        addChild("Solenoid Intake", solenoidI);
         addChild("Ball Switch", ballLoaded);
     }
 
@@ -70,8 +72,36 @@ public class IntakeSubsystem extends SubsystemBase {
      * @return
      */
     public void openballgate() {
-        solenoidG.set(true);
+        solenoidG.set(false);
     }
+
+    /**
+     * Lower Intake
+     * 
+     * @return
+     */
+    public void lowerIntake() {
+        solenoidI.set(true);
+    }
+
+    /**
+     * Opens the ball gate
+     * 
+     * @return
+     */
+    public void raiseIntake() {
+        solenoidI.set(false);
+    }
+
+
+
+
+
+
+
+
+
+
 
     @Override
     public void periodic() {

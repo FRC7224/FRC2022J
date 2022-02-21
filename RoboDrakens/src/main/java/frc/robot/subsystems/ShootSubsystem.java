@@ -25,10 +25,10 @@ import edu.wpi.first.wpilibj.Solenoid;
 public class ShootSubsystem extends SubsystemBase {
 
 
-    private WPI_TalonFX shootMotorTop= new WPI_TalonFX(5);
-    private WPI_TalonFX shootMotorBottom = new WPI_TalonFX(6);
+    private WPI_TalonFX shootMotorTop= new WPI_TalonFX(5,"rio");
+    private WPI_TalonFX shootMotorBottom = new WPI_TalonFX(6,"rio");
     private WPI_VictorSPX elvMotor = new WPI_VictorSPX(7);
-    private Solenoid solenoidS = new Solenoid(0, PneumaticsModuleType.CTREPCM, 1);
+    private Solenoid solenoidP = new Solenoid(0, PneumaticsModuleType.CTREPCM, Constants.kPneumaticsShootPush);
     Zone[] zones = {
     new Zone(Constants.kT0,Constants.kB0),
     new Zone(Constants.kT1,Constants.kB1),
@@ -56,37 +56,11 @@ public class ShootSubsystem extends SubsystemBase {
     new Zone(Constants.kT23,Constants.kB23),
     new Zone(Constants.kT24,Constants.kB24),
     new Zone(Constants.kT25,Constants.kB25),
-
+   ///  special short zone
+    new Zone(Constants.kT26,Constants.kB26),
 };
- // zons[0] = new Zone(8000,25000);
- //  new Zone(8000,25000)
-//    };
-   /** 
-    zones[23] = new Zones(8000,25000);
-    zones[22] = new Zones(8000,25000);
-    zones[21] = new Zones(8000,25000);
-    zones[20] = new Zones(8000,25000);
-    zones[19] = new Zones(8000,25000);
-    zones[18] = new Zones(8000,25000);
-    zones[17] = new Zones(5000,12000);
-    zones[16] = new Zones(5000,12000);
-    zones[15] = new Zones(5000,12000);
-    zones[14] = new Zones(5000,12000);
-    zones[13] = new Zones(5000,12000);
-    zones[12] = new Zones(5000,12000);
-    zones[11] = new Zones(5000,12000);
-    zones[10] = new Zones(5000,12000);
-    zones[9] = new Zones(3000,8000);
-    zones[8] = new Zones(3000,8000);
-    zones[7] = new Zones(3000,8000);
-    zones[6] = new Zones(3000,8000);
-    zones[5] = new Zones(3000,8000);
-    zones[4] = new Zones(3000,8000);
-    zones[3] = new Zones(3000,8000);
-    zones[2] = new Zones(3000,8000);
-    zones[1] = new Zones(3000,8000);
-    zones[0] = new Zones(3000,8000);
-*/
+ 
+
     /**
     *
     */
@@ -94,16 +68,14 @@ public class ShootSubsystem extends SubsystemBase {
  
         addChild("Shoot Motor Top", shootMotorTop );
         addChild("Shoot Motor Bottom", shootMotorBottom );
-        addChild("Solenoid S", solenoidS);
+        addChild("Solenoid Push", solenoidP);
       
-
-
         /**
          * sets up shooter with PID
          */
 
         shootMotorTop.configFactoryDefault();
-        shootMotorTop.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
+        shootMotorTop.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
         shootMotorTop.set(ControlMode.Velocity, 0);
         shootMotorTop.setInverted(true);
         shootMotorTop.setSensorPhase(true);
@@ -111,7 +83,7 @@ public class ShootSubsystem extends SubsystemBase {
         /* Config the peak and nominal outputs */
         shootMotorTop.configNominalOutputForward(0, Constants.kTimeoutMs);
         shootMotorTop.configNominalOutputReverse(0, Constants.kTimeoutMs);
-        shootMotorTop.configPeakOutputForward(34000, Constants.kTimeoutMs);
+        shootMotorTop.configPeakOutputForward(100, Constants.kTimeoutMs);
         shootMotorTop.configPeakOutputReverse(0, Constants.kTimeoutMs);
 
         /* Config the Velocity closed loop gains in slot0 */
@@ -122,14 +94,14 @@ public class ShootSubsystem extends SubsystemBase {
 
         shootMotorBottom.configFactoryDefault();
         shootMotorBottom.set(ControlMode.Velocity, 0);
-        shootMotorBottom.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
+        shootMotorBottom.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
         shootMotorBottom.setSensorPhase(true);
         shootMotorBottom.setInverted(false);
 
         /* Config the peak and nominal outputs */
         shootMotorBottom.configNominalOutputForward(0, Constants.kTimeoutMs);
         shootMotorBottom.configNominalOutputReverse(0, Constants.kTimeoutMs);
-        shootMotorBottom.configPeakOutputForward(34000, Constants.kTimeoutMs);
+        shootMotorBottom.configPeakOutputForward(100, Constants.kTimeoutMs);
         shootMotorBottom.configPeakOutputReverse(0, Constants.kTimeoutMs);
 
         /* Config the Velocity closed loop gains in slot0 */
@@ -167,7 +139,23 @@ public class ShootSubsystem extends SubsystemBase {
         elvMotor.set(ControlMode.PercentOutput, espeed);
    }
 
+ /**
+     * Pushed the Ball to shooter
+     * 
+     * @return
+     */
+    public void pushBall() {
+        solenoidP.set(true);
+    }
 
+    /**
+     * Resets the Ball shooter
+     * 
+     * @return
+     */
+    public void resetBallPush() {
+        solenoidP.set(false);
+    }
 
 
     @Override

@@ -10,8 +10,6 @@
 
 package frc.robot;
 
-import frc.robot.Point;
-
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide
  * numerical or boolean
@@ -32,15 +30,20 @@ public class Constants {
     // Joystick 1 constants
     public static double kdeadzone = 0.1; // Deadzone
     public static int kshiftbutton = 1;
-    public static int ksweepupbutton = 2;
+    public static int kintakeupbutton = 2;
     public static int kdrvautobutton = 3;
     public static int ksweepbutton = 5;
     public static int kconveyerbutton = 6;
-    public static int kelevatorbutton = 7;
+    public static int kshortshootbutton = 7;
     public static int kinitShooter = 8;
     public static int kautobutton = 9;
-    public static int zonedown = 6;
     public static int kclimbButton = 10;
+
+    // Pneumatics
+    public static int kPneumaticsShootGate = 0;
+    public static int kPneumaticsShootPush = 1;
+    public static int kPneumaticsIntake = 2;
+    public static int kPneumaticsShift = 3;
 
     // Drive Subsystem
     public static int kRightMotor1Port = 1;
@@ -76,7 +79,6 @@ public class Constants {
     public static final double kTurnRateToleranceDegPerS = 10; // degrees per second
 
     // Shifter
-
     public static double kshiftRateUp = 1200;
     public static double kshiftRateDown = 800;
     public static boolean shiftOpenState = false;
@@ -93,13 +95,15 @@ public class Constants {
     public static boolean ClimbState = false;
 
     // Intake
-    public static double kIntakeSpeed = 0.7;
-    public static double kConveyorSpeed = 0.7;
-    public static int kballloadport = 0;
+    public static double kIntakeSpeed = 0.4;
+    public static double kConveyorSpeed = 0.4;
     public static int kballsensorchannel = 4;
 
-    // Shooter / Elevator Constants
+    // Move Ball to shooter
 
+    public static int kballIntakeTimer_timer = 5;
+
+    // Shooter / Elevator Constants
     public static double kB0 = 8000;
     public static double kB1 = 8000;
     public static double kB2 = 8000;
@@ -152,7 +156,12 @@ public class Constants {
     public static double kT23 = 8000;
     public static double kT24 = 8000;
     public static double kT25 = 8000;
+    //
+    //
+    public static double kB26 = 500;
+    public static double kT26 = 1000;
 
+    public static int kshortshootzone = 26;
     public static double kelvspeed = 0.5;
 
     public static double shooterTolerance = 300.0;
