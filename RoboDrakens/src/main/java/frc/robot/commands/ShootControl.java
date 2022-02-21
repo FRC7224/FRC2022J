@@ -31,7 +31,6 @@ public class ShootControl extends CommandBase {
 
         m_shootsubsystem = subsystem;
         addRequirements(m_shootsubsystem);
-
         m_intakesubsystem = subsystem2;
         addRequirements(m_intakesubsystem);
 
@@ -53,7 +52,15 @@ public class ShootControl extends CommandBase {
         int zonePosition = 12;
         Joystick joystick1 = new Joystick(0);
         boolean ballshot = false;
+        boolean launchReady = false;
         final double timetorun = Constants.shooterTimer_timer;
+
+
+       // Set Lauch ready status 
+        if (m_intakesubsystem.getballLoadstatus()){
+         launchReady = true;
+        };
+
 
         // If throttle swicth is pressed
         // Change zones
@@ -71,18 +78,14 @@ public class ShootControl extends CommandBase {
         SmartDashboard.putNumber("Zone", zonePosition);
 
         /// Long shoot botton is pressed
-        if (joystick1.getRawButtonPressed(Constants.kinitShooter)) {
-            SmartDashboard.putNumber("shoot mode ", timetorun);
+        if (joystick1.getRawButtonPressed(Constants.kinitShooter) && launchReady) {
             if (timer.get() <= timetorun) {
-                SmartDashboard.putNumber("shoot mode inside ", timetorun);
-                SmartDashboard.putNumber("timer ", timer.get());
                 m_shootsubsystem.setShootSpeed(zonePosition);
 
             } else {
                 m_shootsubsystem.pushBall();
                 m_shootsubsystem.setShootSpeed(zonePosition);
                 m_shootsubsystem.setelvSpeed(Constants.kelvspeed);
-                SmartDashboard.putNumber("shoot mode else ", timetorun);
                 ballshot = true;
             }
         } else {
@@ -93,22 +96,20 @@ public class ShootControl extends CommandBase {
             if (ballshot) { // first time after a ball has been shot
                 new SequentialCommandGroup(new MoveBalltoShooterTimed(m_intakesubsystem));
                 ballshot = false;
+                launchReady = false;
             }
+            
         }
 
         /// short low shoot botton is pressed
-        if (joystick1.getRawButtonPressed(Constants.kshortshootbutton)) {
-            SmartDashboard.putNumber("shoot mode ", timetorun);
+        if (joystick1.getRawButtonPressed(Constants.kshortshootbutton) && launchReady) {
             if (timer.get() <= timetorun) {
-                SmartDashboard.putNumber("shoot mode inside ", timetorun);
-                SmartDashboard.putNumber("timer ", timer.get());
                 m_shootsubsystem.setShootSpeed(zonePosition);
 
             } else {
                 m_shootsubsystem.pushBall();
                 m_shootsubsystem.setShootSpeed(Constants.kshortshootzone);
                 m_shootsubsystem.setelvSpeed(Constants.kelvspeed);
-                SmartDashboard.putNumber("shoot mode else ", timetorun);
                 ballshot = true;
             }
         } else {
@@ -119,6 +120,7 @@ public class ShootControl extends CommandBase {
             if (ballshot) { // first time after a ball has been shot
                 new SequentialCommandGroup(new MoveBalltoShooterTimed(m_intakesubsystem));
                 ballshot = false;
+                launchReady = false;
             }
         }
 
