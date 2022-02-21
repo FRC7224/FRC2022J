@@ -20,6 +20,7 @@ import java.util.concurrent.ScheduledFuture;
 
 import com.ctre.phoenix.schedulers.SequentialScheduler;
 
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.hal.HAL;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -49,7 +50,10 @@ public class Robot extends TimedRobot {
         // autonomous chooser on the dashboard.
         m_robotContainer = RobotContainer.getInstance();
         HAL.report(tResourceType.kResourceType_Framework, tInstances.kFramework_RobotBuilder);
-       SmartDashboard.putData(CommandScheduler.getInstance());
+        SmartDashboard.putData(CommandScheduler.getInstance());
+
+     //   CameraServer.startAutomaticCapture();
+
 
 
     }

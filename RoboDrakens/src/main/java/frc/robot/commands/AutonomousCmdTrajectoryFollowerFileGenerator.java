@@ -128,6 +128,7 @@ public void initialize() {
     // Encoder Position is the current, cumulative position of your encoder.
     // If you're using an SRX, this will be the
     // 'getEncPosition' function.
+    // 360 CPS 1:3 EVO 12:1 = 90? x4 = 360
     // 100 is the amount of encoder ticks per full revolution
     // 20 ticks per rev * 5:1 gear ratio = 100
     // Wheel Diameter is the diameter of your wheels (or pulley for a track system)

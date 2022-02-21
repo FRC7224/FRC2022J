@@ -10,6 +10,8 @@
 
 package frc.robot;
 
+import frc.robot.Point;
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide
  * numerical or boolean
@@ -29,14 +31,16 @@ public class Constants {
     */
     // Joystick 1 constants
     public static double kdeadzone = 0.1; // Deadzone
-    public static int kinitShooter = 1;
-    public static int kshiftbutton = 2;
-    public static int kintakebutton = 9;
+    public static int kshiftbutton = 1;
+    public static int ksweepupbutton = 2;
+    public static int kdrvautobutton = 3;
+    public static int ksweepbutton = 5;
+    public static int kconveyerbutton = 6;
+    public static int kelevatorbutton = 7;
+    public static int kinitShooter = 8;
+    public static int kautobutton = 9;
     public static int zonedown = 6;
     public static int kclimbButton = 10;
-    public static int zoneup = 5;
-    public static int kpreButton = 7;
-    public static int kShootOverideButton = 8;
 
     // Drive Subsystem
     public static int kRightMotor1Port = 1;
@@ -51,7 +55,9 @@ public class Constants {
     public static final boolean kLeftEncoderReversed = false;
     public static final boolean kRightEncoderReversed = true;
 
-    public static final int kEncoderCPR = 1024;
+    public static final int kEncoderCPR = 348; // 12.41:1 Gear box, 1:3 encoder ratio, encoder 360 CPR
+                                               // Ratio A 12.41 Ratio B 5.45
+                                               // 360/12.41 * 3 * 4 =
     public static final double kWheelDiameterInches = 4;
     public static final double kEncoderDistancePerPulse =
             // Assumes the encoders are directly mounted on the wheel shafts
@@ -67,6 +73,7 @@ public class Constants {
     public static final double kMaxTurnAccelerationDegPerSSquared = 300;
 
     public static final double kTurnToleranceDeg = 2;
+    public static final double kTurnRateToleranceDegPerS = 10; // degrees per second
 
     // Shifter
 
@@ -88,26 +95,66 @@ public class Constants {
     // Intake
     public static double kIntakeSpeed = 0.7;
     public static double kConveyorSpeed = 0.7;
+    public static int kballloadport = 0;
+    public static int kballsensorchannel = 4;
 
     // Shooter / Elevator Constants
+
+    public static double kB0 = 8000;
+    public static double kB1 = 8000;
+    public static double kB2 = 8000;
+    public static double kB3 = 8000;
+    public static double kB4 = 8000;
+    public static double kB5 = 8000;
+    public static double kB6 = 8000;
+    public static double kB7 = 8000;
+    public static double kB8 = 8000;
+    public static double kB9 = 8000;
+    public static double kB10 = 8000;
+    public static double kB11 = 8000;
+    public static double kB12 = 8000;
+    public static double kB13 = 8000;
+    public static double kB14 = 12500;
+    public static double kB15 = 12500;
+    public static double kB16 = 12500;
+    public static double kB17 = 12500;
+    public static double kB18 = 12500;
+    public static double kB19 = 25000;
+    public static double kB20 = 25000;
+    public static double kB21 = 25000;
+    public static double kB22 = 25000;
+    public static double kB23 = 25000;
+    public static double kB24 = 25000;
+    public static double kB25 = 25000;
+    public static double kT0 = 3000;
+    public static double kT1 = 3000;
+    public static double kT2 = 3000;
+    public static double kT3 = 3000;
+    public static double kT4 = 3000;
+    public static double kT5 = 3000;
+    public static double kT6 = 3000;
+    public static double kT7 = 3000;
+    public static double kT8 = 3000;
+    public static double kT9 = 3000;
+    public static double kT10 = 3000;
+    public static double kT11 = 3000;
+    public static double kT12 = 3000;
+    public static double kT13 = 3000;
+    public static double kT14 = 5000;
+    public static double kT15 = 5000;
+    public static double kT16 = 5000;
+    public static double kT17 = 5000;
+    public static double kT18 = 5000;
+    public static double kT19 = 8000;
+    public static double kT20 = 8000;
+    public static double kT21 = 8000;
+    public static double kT22 = 8000;
+    public static double kT23 = 8000;
+    public static double kT24 = 8000;
+    public static double kT25 = 8000;
+
     public static double kelvspeed = 0.5;
-    public static int zone = 4;
-    public static double zone1shootertargetspeedTop = 8333;
-    public static double zone1shootertargetspeedBottom = 25000;
-    public static double zone2shootertargetspeedTop = 5000;
-    public static double zone2shootertargetspeedBottom = 15000;
-    public static double zone3shootertargetspeedTop = 1000;
-    public static double zone3shootertargetspeedBottom = 15000;
-    public static double zone4shootertargetspeedTop = 3000;
-    public static double zone4shootertargetspeedBottom = 9000;
-    public static double z1shootspeedtop = zone1shootertargetspeedTop;
-    public static double z1shootspeedbottom = zone1shootertargetspeedBottom;
-    public static double z2shootspeedtop = zone2shootertargetspeedTop;
-    public static double z2shootspeedbottom = zone2shootertargetspeedBottom;
-    public static double z3shootspeedtop = zone3shootertargetspeedTop;
-    public static double z3shootspeedbottom = zone3shootertargetspeedBottom;
-    public static double z4shootspeedtop = zone4shootertargetspeedTop;
-    public static double z4shootspeedbottom = zone4shootertargetspeedBottom;
+
     public static double shooterTolerance = 300.0;
     public static double shooterTimer_timer = 1.2;
     public static boolean shooterMode = false;
@@ -122,7 +169,5 @@ public class Constants {
     public static double kshootBottomI = 0.001;
     public static double kshootBottomD = 20;
     public static double kshootBottomF = 1023.0 / 7200.0;
-
-
 
 }

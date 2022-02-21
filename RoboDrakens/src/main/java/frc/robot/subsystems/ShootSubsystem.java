@@ -9,6 +9,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.Zone;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
@@ -28,16 +29,73 @@ public class ShootSubsystem extends SubsystemBase {
     private WPI_TalonFX shootMotorBottom = new WPI_TalonFX(6);
     private WPI_VictorSPX elvMotor = new WPI_VictorSPX(7);
     private Solenoid solenoidS = new Solenoid(0, PneumaticsModuleType.CTREPCM, 1);
+    Zone[] zones = {
+    new Zone(Constants.kT0,Constants.kB0),
+    new Zone(Constants.kT1,Constants.kB1),
+    new Zone(Constants.kT2,Constants.kB2),
+    new Zone(Constants.kT3,Constants.kB3),
+    new Zone(Constants.kT4,Constants.kB4),
+    new Zone(Constants.kT5,Constants.kB5),
+    new Zone(Constants.kT6,Constants.kB6),
+    new Zone(Constants.kT7,Constants.kB7),
+    new Zone(Constants.kT8,Constants.kB8),
+    new Zone(Constants.kT9,Constants.kB9),
+    new Zone(Constants.kT10,Constants.kB10),
+    new Zone(Constants.kT11,Constants.kB11),
+    new Zone(Constants.kT12,Constants.kB12),
+    new Zone(Constants.kT13,Constants.kB13),
+    new Zone(Constants.kT14,Constants.kB14),
+    new Zone(Constants.kT15,Constants.kB15),
+    new Zone(Constants.kT16,Constants.kB16),
+    new Zone(Constants.kT17,Constants.kB17),
+    new Zone(Constants.kT18,Constants.kB18),
+    new Zone(Constants.kT19,Constants.kB19),
+    new Zone(Constants.kT20,Constants.kB20),
+    new Zone(Constants.kT21,Constants.kB21),
+    new Zone(Constants.kT22,Constants.kB22),
+    new Zone(Constants.kT23,Constants.kB23),
+    new Zone(Constants.kT24,Constants.kB24),
+    new Zone(Constants.kT25,Constants.kB25),
 
+};
+ // zons[0] = new Zone(8000,25000);
+ //  new Zone(8000,25000)
+//    };
+   /** 
+    zones[23] = new Zones(8000,25000);
+    zones[22] = new Zones(8000,25000);
+    zones[21] = new Zones(8000,25000);
+    zones[20] = new Zones(8000,25000);
+    zones[19] = new Zones(8000,25000);
+    zones[18] = new Zones(8000,25000);
+    zones[17] = new Zones(5000,12000);
+    zones[16] = new Zones(5000,12000);
+    zones[15] = new Zones(5000,12000);
+    zones[14] = new Zones(5000,12000);
+    zones[13] = new Zones(5000,12000);
+    zones[12] = new Zones(5000,12000);
+    zones[11] = new Zones(5000,12000);
+    zones[10] = new Zones(5000,12000);
+    zones[9] = new Zones(3000,8000);
+    zones[8] = new Zones(3000,8000);
+    zones[7] = new Zones(3000,8000);
+    zones[6] = new Zones(3000,8000);
+    zones[5] = new Zones(3000,8000);
+    zones[4] = new Zones(3000,8000);
+    zones[3] = new Zones(3000,8000);
+    zones[2] = new Zones(3000,8000);
+    zones[1] = new Zones(3000,8000);
+    zones[0] = new Zones(3000,8000);
+*/
     /**
     *
     */
-    public void setupShooter() {
+    public  ShootSubsystem() {
  
         addChild("Shoot Motor Top", shootMotorTop );
         addChild("Shoot Motor Bottom", shootMotorBottom );
         addChild("Solenoid S", solenoidS);
-        
+      
 
 
         /**
@@ -85,11 +143,22 @@ public class ShootSubsystem extends SubsystemBase {
     /**
      * sets the shooter speed
      */
-    public void setShootSpeed(final double topspeed, double bottomspeed) {
+    public void setShootSpeed( int zoneposition) {
         // shootMotor1.set(speed);
-        shootMotorTop.set(ControlMode.Velocity, topspeed);
-        shootMotorBottom.set(ControlMode.Velocity, bottomspeed);
+        shootMotorTop.set(ControlMode.Velocity, zones[zoneposition].getTopMotor());
+        shootMotorBottom.set(ControlMode.Velocity, zones[zoneposition].getBottomMotor());
     }
+
+
+    /**
+     * stop the shooter speed
+     */
+    public void stopshooter() {
+        shootMotorTop.set(ControlMode.Velocity, 0);
+        shootMotorBottom.set(ControlMode.Velocity,0);
+    }
+
+
 
      /**
       * sets the elevator speed

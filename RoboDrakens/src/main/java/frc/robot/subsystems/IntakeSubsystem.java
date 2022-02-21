@@ -8,52 +8,70 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
-//import edu.wpi.first.wpilibj.DigitalInput;
-//import edu.wpi.first.wpilibj.PneumaticsModuleType;
-//import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import edu.wpi.first.wpilibj.Solenoid;
 
 /**
  *
  */
 public class IntakeSubsystem extends SubsystemBase {
 
-    private WPI_VictorSPX intakemotor;
-    private WPI_VictorSPX conveyormotor;
-  //  private Solenoid solenoidG;
- //   private DigitalInput ballSwitch;
+    private WPI_VictorSPX intakemotor = new WPI_VictorSPX(8);
+    private WPI_VictorSPX conveyormotor = new WPI_VictorSPX(9);
+    DigitalInput ballLoaded = new DigitalInput(Constants.kballloadport);
+    private Solenoid solenoidG = new Solenoid(0, PneumaticsModuleType.CTREPCM, Constants.kballsensorchannel);
+
+    public IntakeSubsystem() {
+
+        addChild("Solenoid G", solenoidG);
+        addChild("Ball Switch", ballLoaded);
+    }
 
     /**
      * sets the ball intake motor speed -1 to +1
      */
     public void setIntakeMotor(double ispeed) {
-        intakemotor = new WPI_VictorSPX(8);
         intakemotor.set(ControlMode.PercentOutput, ispeed);
     }
 
- /**
+    /**
      * sets the ball intake motor speed -1 to +1
      */
     public void setConveyorMotor(double conspeed) {
-        conveyormotor = new WPI_VictorSPX(9);
         conveyormotor.set(ControlMode.PercentOutput, conspeed);
     }
 
+    /**
+     * return the status if the ball is loaded in the shooter
+     * 
+     * @return
+     */
+    public boolean getballLoadstatus() {
+        return (ballLoaded.get());
+    }
 
+    /**
+     * Closes the ball gate
+     * 
+     * @return
+     */
+    public void closeballgate() {
+        solenoidG.set(true);
+    }
 
-
-
-
-    // public void placeholder (double temp) {
-    // solenoidG = new Solenoid(0, PneumaticsModuleType.CTREPCM, 2);
-    // addChild("Solenoid G", solenoidG);
-    // ballSwitch = new DigitalInput(0);
-    // addChild("Ball Switch", ballSwitch);
-    // }
-    
-
+    /**
+     * Opens the ball gate
+     * 
+     * @return
+     */
+    public void openballgate() {
+        solenoidG.set(true);
+    }
 
     @Override
     public void periodic() {

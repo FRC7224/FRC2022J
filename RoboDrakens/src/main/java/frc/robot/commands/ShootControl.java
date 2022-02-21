@@ -22,18 +22,19 @@ public class ShootControl extends CommandBase {
     private final ShootSubsystem m_shootsubsystem;
     // Used for Button Toggle Code
     private final Timer timer = new Timer();
+    
 
     public ShootControl(ShootSubsystem subsystem) {
 
         m_shootsubsystem = subsystem;
-        addRequirements(m_shootsubsystem);
+        addRequirements(m_shootsubsystem);      
 
     }
 
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-        m_shootsubsystem.setupShooter();
+   //     m_shootsubsystem.setupShooter();
         Constants.shooterMode = false;
         timer.start();
 
@@ -43,8 +44,7 @@ public class ShootControl extends CommandBase {
     @Override
     public void execute() {
 
-        double motorspeedTop;
-        double motorspeedBottom;
+        int zonePosition = 12;
         Joystick joystick1 = new Joystick(0);
 
         // if button 1 is pressed
@@ -53,60 +53,39 @@ public class ShootControl extends CommandBase {
         final double timetorun = Constants.shooterTimer_timer;
 
         // cahnge zones
-        if (joystick1.getRawButtonPressed(Constants.zoneup)) {
-            if (Constants.zone < 4) {
-                Constants.zone = Constants.zone + 1;
+        if (joystick1.getRawAxis(4) > 0) {  
+            if (zonePosition < 25) {
+                zonePosition= zonePosition+ 1;
             }
         }
 
-        if (joystick1.getRawButtonPressed(Constants.zonedown)) {
-            if (Constants.zone > 1) {
-                Constants.zone = Constants.zone - 1;
+        if (joystick1.getRawAxis(4) < 0) {
+            if (zonePosition > 1) {
+                zonePosition = zonePosition - 1;
             }
         }
 
-        SmartDashboard.putNumber("Zone", Constants.zone);
+        SmartDashboard.putNumber("Zone", zonePosition);
 
         if (joystick1.getRawButton(Constants.kinitShooter)) {
             SmartDashboard.putNumber("shoot mode ", timetorun);
 
-            switch (Constants.zone) {
-                case 1: // Zone 1 Green
-                    motorspeedTop = Constants.zone1shootertargetspeedTop;
-                    motorspeedBottom = Constants.zone1shootertargetspeedBottom;
-                    break;
-                case 2: // Zone 2 Yellow
-                    motorspeedTop = Constants.zone2shootertargetspeedTop;
-                    motorspeedBottom = Constants.zone2shootertargetspeedBottom;
-                    break;
-                case 3: // Zone 3 Blue
-                    motorspeedTop = Constants.zone3shootertargetspeedTop;
-                    motorspeedBottom = Constants.zone3shootertargetspeedBottom;
-                    break;
-                case 4: // Zone 4 red
-                    motorspeedTop = Constants.zone4shootertargetspeedTop;
-                    motorspeedBottom = Constants.zone4shootertargetspeedBottom;
-                    break;
-                default: // Zone 4
-                    motorspeedTop = Constants.zone4shootertargetspeedTop;
-                    motorspeedBottom = Constants.zone4shootertargetspeedBottom;
-                    break;
-            }
+
 
             if (timer.get() <= timetorun) {
                 SmartDashboard.putNumber("shoot mode inside ", timetorun);
                 SmartDashboard.putNumber("timer ", timer.get());
-                m_shootsubsystem.setShootSpeed(motorspeedTop, motorspeedBottom);
+                m_shootsubsystem.setShootSpeed(zonePosition);
 
             } else {
-                m_shootsubsystem.setShootSpeed(motorspeedTop, motorspeedBottom);
+                m_shootsubsystem.setShootSpeed(zonePosition);
                 m_shootsubsystem.setelvSpeed(Constants.kelvspeed);
                  SmartDashboard.putNumber("shoot mode else ", timetorun);
             }
         } else
 
         {
-            m_shootsubsystem.setShootSpeed(0, 0);
+            m_shootsubsystem.stopshooter();
             m_shootsubsystem.setelvSpeed(0);
             timer.reset();
         }
