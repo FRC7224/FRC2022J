@@ -68,7 +68,7 @@ public class ShootControl extends CommandBase {
 
         // If throttle swicth is pressed
         // Change zones
-        if (buttonDelay == 8) { // Runs every x loops
+        if (buttonDelay == 5) { // Runs every x loops
             if ((joystick1.getRawAxis(4) > 0) & (zonePosition < 25)) {
                 zonePosition = zonePosition + 1;
             }

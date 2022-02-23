@@ -32,6 +32,8 @@ public class IntakeSubsystem extends SubsystemBase {
         addChild("Solenoid Gate", solenoidG);
         addChild("Solenoid Intake", solenoidI);
         addChild("Ball Switch", ballLoaded);
+        addChild("Intake Motor",intakemotor);
+        addChild("Conveyor motor",conveyormotor);
     }
 
     /**

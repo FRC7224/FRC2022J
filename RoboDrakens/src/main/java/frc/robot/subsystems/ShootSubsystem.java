@@ -18,6 +18,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -118,6 +119,8 @@ public class ShootSubsystem extends SubsystemBase {
      */
     public void setShootSpeed( int zoneposition) {
         // shootMotor1.set(speed);
+        SmartDashboard.putNumber("top", zones[zoneposition].getTopMotor());
+        SmartDashboard.putNumber("zoneposition", zoneposition);
         shootMotorTop.set(ControlMode.Velocity, zones[zoneposition].getTopMotor());
         shootMotorBottom.set(ControlMode.Velocity, zones[zoneposition].getBottomMotor());
     }
