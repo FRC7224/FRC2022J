@@ -68,6 +68,7 @@ public class ShootSubsystem extends SubsystemBase {
  
         addChild("Shoot Motor Top", shootMotorTop );
         addChild("Shoot Motor Bottom", shootMotorBottom );
+        addChild("Elevator", elvMotor );
         addChild("Solenoid Push", solenoidP);
       
         /**

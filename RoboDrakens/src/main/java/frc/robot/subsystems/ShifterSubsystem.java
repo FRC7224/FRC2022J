@@ -9,6 +9,7 @@ package frc.robot.subsystems;
 
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Solenoid;
 
@@ -17,27 +18,27 @@ import edu.wpi.first.wpilibj.Solenoid;
  */
 public class ShifterSubsystem extends SubsystemBase {
 
-    private Solenoid solenoid1;
+    private Solenoid shiftSolenoid;
 
     /**
     *
     */
     public ShifterSubsystem() {
 
-     solenoid1 = new Solenoid(0, PneumaticsModuleType.CTREPCM, 0);
-    addChild("Solenoid 1", solenoid1);
+     shiftSolenoid = new Solenoid(0, PneumaticsModuleType.CTREPCM, Constants.kPneumaticsShift );
+    addChild("Shifter", shiftSolenoid);
     }
  
     public void shiftHigh() {
     // opens shifter/put in high gear
-    solenoid1.set(true);
+    shiftSolenoid.set(true);
     } 
 
 
 
     public void shiftLow() {
     // closes shifter/put in low gare
-    solenoid1.set(false);
+    shiftSolenoid.set(false);
     }
 
     

@@ -165,7 +165,8 @@ public class Constants {
     public static double kelvspeed = 0.5;
 
     public static double shooterTolerance = 300.0;
-    public static double shooterTimer_timer = 1.2;
+    public static double kshooterTimer_spin = 1.2;  /// was 1.2
+    public static double kshooterTimer_timer = 2.2;  /// was 1.2
     public static boolean shooterMode = false;
     public static int kPIDLoopIdx = 0;
     public static int kTimeoutMs = 30;

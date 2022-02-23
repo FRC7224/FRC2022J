@@ -44,8 +44,7 @@ public class DriveTeleop extends CommandBase
         drivepid.setTolerance(Constants.kTurnToleranceDeg);
 
         SendableRegistry.setName(drivepid, "DriveSubsystem" ,"Drive Stabilize PID");
-        
- 
+         
         m_drivesubsystem = subsystem;
         addRequirements(m_drivesubsystem);
 
@@ -55,6 +54,7 @@ public class DriveTeleop extends CommandBase
     @Override
     public void execute() {
         Joystick joystick1 = new Joystick(0);
+  
         double forward = -m_drivesubsystem.deadZone(joystick1.getY()); // forward
         double turn = -m_drivesubsystem.deadZone(joystick1.getX()); // turn
         if (forward >= 0) {
@@ -67,8 +67,6 @@ public class DriveTeleop extends CommandBase
         } else {
             turn = -(turn * turn);
         }
-        SmartDashboard.putNumber("forward", forward);
-        SmartDashboard.putNumber("turn", turn);
         SmartDashboard.putNumber("x", joystick1.getX());
         SmartDashboard.putNumber("y", joystick1.getY());
         m_drivesubsystem.autoshift();
@@ -104,13 +102,13 @@ public class DriveTeleop extends CommandBase
                 firstpassturning = true;
                 // Reset angle
             }
-            m_drivesubsystem.displayDriveData();
+       //   m_drivesubsystem.displayDriveData();  
             m_drivesubsystem.arcadeDrive(forward, turn); // PID controlled Drive
         } // End of BasicDrive PID Control
           // ELSE PID is Off
         else { // use standard arcadeDrive
                // * PID off mode *****
-            m_drivesubsystem.displayDriveData();
+        //    m_drivesubsystem.displayDriveData();
             m_drivesubsystem.arcadeDrive(forward, turn);
         }
         // End of PID enable loop\

@@ -27,7 +27,7 @@ public class ClimbSubsystem extends SubsystemBase {
      * sets the climb motor speed -1 to +1
      */
     public void climbMotorControl(double cspeed) {
-        climbmotor = new WPI_TalonFX(9);
+        climbmotor = new WPI_TalonFX(10);
         climbmotor.set(ControlMode.PercentOutput, cspeed);
 
     }
