@@ -27,7 +27,7 @@ public class ShootSubsystem extends SubsystemBase {
 
 
     private WPI_TalonFX shootMotorTop= new WPI_TalonFX(5,"rio");
-    private WPI_TalonFX shootMotorBottom = new WPI_TalonFX(6,"rio");
+    private WPI_TalonFX shootMotorBottom = new WPI_TalonFX(9,"rio");
     private WPI_VictorSPX elvMotor = new WPI_VictorSPX(7);
     private Solenoid solenoidP = new Solenoid(0, PneumaticsModuleType.CTREPCM, Constants.kPneumaticsShootPush);
     Zone[] zones = {

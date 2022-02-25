@@ -32,6 +32,8 @@ public class Constants {
     public static int kshiftbutton = 1;
     public static int kintakeupbutton = 2;
     public static int kdrvautobutton = 3;
+    public static int kclimboverridebutton = 4;
+
     public static int ksweepbutton = 5;
     public static int kconveyerbutton = 6;
     public static int kshortshootbutton = 7;
@@ -89,10 +91,26 @@ public class Constants {
     public static int kencodermode = 0;
 
     // Climb
-    public static double kClimbSpeed = 0.1;
-    public static double kmaxClimbSpeed = 1.0;
-    public static double kminClimbpeed = 0.0;
-    public static boolean ClimbState = false;
+
+    public static double kMaxClimbHeight = 245000;
+    public static double kMinClimbHeight = 0;
+    public static int kClimbTimeoutMs = 30;
+    public static double kClimbP = 0.15;
+    public static double kClimbI = 0;
+    public static double kClimbD = 1.0;
+    public static double kClimbF = 0.0;
+    public static double kIzone = 0.0;
+    public static double  kPeakOutput = 1.0;
+    public static boolean kClimbSensorPhase  = true ;
+    public static boolean kClimbMotorInvert = true; 
+    public static int  kClimbSlotIdx = 0;
+    public static int  kClimbPIDLoopIdx = 0;
+
+
+
+
+
+
 
     // Intake
     public static double kIntakeSpeed = 0.4;
