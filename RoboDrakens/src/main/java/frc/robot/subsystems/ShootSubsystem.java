@@ -26,9 +26,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class ShootSubsystem extends SubsystemBase {
 
 
-    private WPI_TalonFX shootMotorTop= new WPI_TalonFX(5,"rio");
-    private WPI_TalonFX shootMotorBottom = new WPI_TalonFX(9,"rio");
-    private WPI_VictorSPX elvMotor = new WPI_VictorSPX(7);
+    private WPI_TalonFX shootMotorTop= new WPI_TalonFX(Constants.kShootMotorTopPort,"rio");
+    private WPI_TalonFX shootMotorBottom = new WPI_TalonFX(Constants.kShootMotorBottomPort,"rio");
+    private WPI_VictorSPX elvMotor = new WPI_VictorSPX(Constants.kShootMotorElevatorPort);
     private Solenoid solenoidP = new Solenoid(0, PneumaticsModuleType.CTREPCM, Constants.kPneumaticsShootPush);
     Zone[] zones = {
     new Zone(Constants.kT0,Constants.kB0),

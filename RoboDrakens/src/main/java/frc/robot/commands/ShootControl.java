@@ -22,7 +22,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class ShootControl extends CommandBase {
 
     private final ShootSubsystem m_shootsubsystem;
-    private final IntakeSubsystem m_intakesubsystem;
+
     int zonePosition = 12;
     int buttonDelay ;
     boolean launchInProgress = false;
@@ -30,13 +30,12 @@ public class ShootControl extends CommandBase {
     // Used for Button Toggle Code
     private final Timer timer = new Timer();
 
-    public ShootControl(ShootSubsystem subsystem, IntakeSubsystem subsystem2) {
+    public ShootControl(ShootSubsystem subsystem) {
 
         m_shootsubsystem = subsystem;
         addRequirements(m_shootsubsystem);
 
-        m_intakesubsystem = subsystem2;
-        addRequirements(m_intakesubsystem);
+
 
     }
 
@@ -60,7 +59,7 @@ public class ShootControl extends CommandBase {
        
 
         // Set Lauch ready status
-        if (m_intakesubsystem.getballLoadstatus()) {
+        if (Constants.LAUNCHREADY) {
             launchReady = true;
             SmartDashboard.putBoolean("launchReady", launchReady);
         } ;
@@ -111,7 +110,8 @@ public class ShootControl extends CommandBase {
             m_shootsubsystem.setelvSpeed(0);
             m_shootsubsystem.resetBallPush();
             if (ballshot) { // first time after a ball has been shot
-                new SequentialCommandGroup(new MoveBalltoShooterTimed(m_intakesubsystem));
+            //    new SequentialCommandGroup(new MoveBalltoShooterTimed(m_intakesubsystem));
+                Constants.LAUNCHREADY = false;
                 ballshot = false;
                 launchReady = false;
             }

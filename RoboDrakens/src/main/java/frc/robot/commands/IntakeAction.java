@@ -8,8 +8,6 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.PneumaticsModuleType;
-import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
@@ -37,38 +35,39 @@ public class IntakeAction extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
+
+        // Set Lauch ready satus
+        // sets state of LAUNCHREADY
+        boolean ballloaded;
+        ballloaded = m_intakesubsystem.getballLoadstatus();
+
+        SmartDashboard.putNumber("intakeeee running", Constants.kIntakeSpeed);
         Joystick joystick1 = new Joystick(0);
-        if (joystick1.getRawButtonPressed(Constants.ksweepbutton)) { // Robot intake
+        if (joystick1.getRawButton(Constants.kintakebutton)) { // Robot intake
             m_intakesubsystem.lowerIntake();
             m_intakesubsystem.setIntakeMotor(Constants.kIntakeSpeed); // Robot conveyor
-            if (m_intakesubsystem.getballLoadstatus()) { // is ball loaded ?
-                m_intakesubsystem.setConveyorMotor(0); // stop conveyor ball is loaded
-                m_intakesubsystem.closeballgate(); // clsoe the ball gate
+            if (ballloaded == false) { // is ball not loaded 
+                m_intakesubsystem.setConveyorMotor(Constants.kConveyorSpeed);
+                m_intakesubsystem.openballgate();
             } else {
+                m_intakesubsystem.setConveyorMotor(0); // stop conveyor ball is loaded
+                m_intakesubsystem.closeballgate(); // close the ball gate
+            }
+        } else  { 
+            if (joystick1.getRawButton(Constants.kconveyerbutton)) { // Robot intake
                 m_intakesubsystem.setConveyorMotor(Constants.kConveyorSpeed);
                 m_intakesubsystem.openballgate(); // open the ball gate
+            } else {  // turns off intake and convayor
+                m_intakesubsystem.setIntakeMotor(0); // stop conveyor ball is loaded
+                m_intakesubsystem.setConveyorMotor(0); // stop conveyor ball is loaded
+                m_intakesubsystem.closeballgate(); // clsoe the ball gate
             }
-        } else { // toggle off
-            m_intakesubsystem.setIntakeMotor(0); // Robot intake set ot 0
-            m_intakesubsystem.setConveyorMotor(0); // Robot conveyor set ot 0
-            // Robot intake set ot 0
         }
 
-        // Override conveyer and gate (no sensor)
-        if (joystick1.getRawButtonPressed(Constants.kconveyerbutton)) { // Robot intake
-            m_intakesubsystem.setConveyorMotor(Constants.kConveyorSpeed);
-            m_intakesubsystem.openballgate(); // open the ball gate
-        } else {
-            m_intakesubsystem.setConveyorMotor(0); // stop conveyor ball is loaded
-            m_intakesubsystem.closeballgate(); // clsoe the ball gate
-        }
-
-        //  Rasie Intake 
-        if (joystick1.getRawButtonPressed(Constants.kintakeupbutton)) { // Robot intake
+        // Rasie Intake
+        if (joystick1.getRawButton(Constants.kintakeupbutton)) { // Robot intake
             m_intakesubsystem.raiseIntake();
         }
-
-
 
     }
 

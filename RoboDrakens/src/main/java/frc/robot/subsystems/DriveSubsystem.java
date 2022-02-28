@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 
@@ -31,7 +32,12 @@ public class DriveSubsystem extends SubsystemBase {
   // private WPI_TalonFX right2; // right 2
   // private WPI_TalonFX left1; // left 1
  //  private WPI_TalonFX temp; // left 2
-   
+  
+
+// WPI_TalonFX left1 = new WPI_TalonFX(Constants.kLeftMotor1Port);
+// WPI_TalonFX left2 = new WPI_TalonFX(Constants.kLeftMotor2Port);
+// WPI_TalonFX right1 = new WPI_TalonFX(Constants.kRightMotor1Port);
+// WPI_TalonFX right2 = new WPI_TalonFX(Constants.kRightMotor2Port);
 
  WPI_TalonSRX left1 = new WPI_TalonSRX(Constants.kLeftMotor1Port);
  WPI_TalonSRX left2 = new WPI_TalonSRX(Constants.kLeftMotor2Port);

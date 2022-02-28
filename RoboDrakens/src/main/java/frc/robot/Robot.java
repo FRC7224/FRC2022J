@@ -54,8 +54,6 @@ public class Robot extends TimedRobot {
 
      //   CameraServer.startAutomaticCapture();
 
-
-
     }
 
     /**

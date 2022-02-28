@@ -24,34 +24,65 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public class Constants {
-    /**
-    
+
+   /**
+    * 
+    CAN ID constants
     */
+    // Drive
+    public static int kRightMotor1Port = 21;
+    public static int kRightMotor2Port = 2;
+    public static int kLeftMotor1Port = 23;
+    public static int kLeftMotor2Port = 4;
+    // Shooter
+    public static int kShootMotorTopPort = 6;
+    public static int kShootMotorBottomPort = 7;
+    public static int kShootMotorElevatorPort = 8;
+    // intake
+    public static int kIntakeMotorPort = 3;
+    public static int kConveyorMotorPort = 1;
+    // Climb
+    public static int kClimblockPort = 11;
+    // Light
+    public static int kLightPort = 12;
+
+    // Pneumatics
+
+    public static int kPneumaticsShootGate = 0;
+    public static int kPneumaticsShootPush = 1;
+    public static int kPneumaticsIntake = 2;
+    public static int kPneumaticsShift = 3;
+
+
+
+
     // Joystick 1 constants
     public static double kdeadzone = 0.1; // Deadzone
+
     public static int kshiftbutton = 1;
     public static int kintakeupbutton = 2;
     public static int kdrvautobutton = 3;
     public static int kclimboverridebutton = 4;
 
-    public static int ksweepbutton = 5;
+    public static int kintakebutton = 5;
     public static int kconveyerbutton = 6;
     public static int kshortshootbutton = 7;
     public static int kinitShooter = 8;
     public static int kautobutton = 9;
     public static int kclimbButton = 10;
 
-    // Pneumatics
-    public static int kPneumaticsShootGate = 0;
-    public static int kPneumaticsShootPush = 1;
-    public static int kPneumaticsIntake = 2;
-    public static int kPneumaticsShift = 3;
+/***
+ * 
+ * Global state varibles
+ */
+public static Boolean LAUNCHED = false;
+public static Boolean LAUNCHREADY = false;
+
+
+
 
     // Drive Subsystem
-    public static int kRightMotor1Port = 1;
-    public static int kRightMotor2Port = 2;
-    public static int kLeftMotor1Port = 3;
-    public static int kLeftMotor2Port = 4;
+
 
     public static boolean kenablePID = true;
 
@@ -107,14 +138,9 @@ public class Constants {
     public static int  kClimbPIDLoopIdx = 0;
 
 
-
-
-
-
-
     // Intake
-    public static double kIntakeSpeed = 0.4;
-    public static double kConveyorSpeed = 0.4;
+    public static double kIntakeSpeed = 0.3;
+    public static double kConveyorSpeed = 0.3;
     public static int kballsensorchannel = 4;
 
     // Move Ball to shooter

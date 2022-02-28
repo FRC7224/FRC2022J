@@ -70,7 +70,8 @@ public class RobotContainer {
     m_intakesubsystem.setDefaultCommand(new IntakeAction(m_intakesubsystem));
     m_pneumaticssubsystem.setDefaultCommand(new PneumaticsControl(m_pneumaticssubsystem));
     m_shiftersubsystem.setDefaultCommand(new ShifterControl(m_shiftersubsystem));
-    m_shootsubsystem.setDefaultCommand(new ShootControl(m_shootsubsystem, m_intakesubsystem));
+     m_shootsubsystem.setDefaultCommand(new ShootControl(m_shootsubsystem));
+
 
     // Configure autonomous sendable chooser
 
