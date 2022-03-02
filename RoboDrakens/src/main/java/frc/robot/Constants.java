@@ -77,6 +77,8 @@ public class Constants {
     public static int kinitShooter = 8;
     public static int kautobutton = 9;
     public static int kclimbButton = 10;
+    public static int kclimbLock = 11;
+    public static int kclimbrelease = 12;
 
 /***
  * 
@@ -143,6 +145,7 @@ public static Boolean LAUNCHREADY = false;
     public static boolean kClimbMotorInvert = true; 
     public static int  kClimbSlotIdx = 0;
     public static int  kClimbPIDLoopIdx = 0;
+    public static double kclimbreleaseP = 0.5;
 
 
     // Intake
@@ -181,32 +184,32 @@ public static Boolean LAUNCHREADY = false;
     public static double kB23 = 25000;
     public static double kB24 = 25000;
     public static double kB25 = 25000;
-    public static double kT0 = -3000;
-    public static double kT1 = -3000;
-    public static double kT2 = -3000;
-    public static double kT3 = -3000;
-    public static double kT4 = -3000;
-    public static double kT5 = -3000;
-    public static double kT6 = -3000;
-    public static double kT7 = -3000;
-    public static double kT8 = -3000;
-    public static double kT9 = -3000;
-    public static double kT10 = -3000;
-    public static double kT11 = -3000;
-    public static double kT12 = -3000;
-    public static double kT13 = -3000;
-    public static double kT14 = -5000;
-    public static double kT15 = -5000;
-    public static double kT16 = -5000;
-    public static double kT17 = -5000;
-    public static double kT18 = -5000;
-    public static double kT19 = -8000;
-    public static double kT20 = -8000;
-    public static double kT21 = -8000;
-    public static double kT22 = -8000;
-    public static double kT23 = -8000;
-    public static double kT24 = -8000;
-    public static double kT25 = -8000;
+    public static double kT0 = 3000;
+    public static double kT1 = 3000;
+    public static double kT2 = 3000;
+    public static double kT3 = 3000;
+    public static double kT4 = 3000;
+    public static double kT5 = 3000;
+    public static double kT6 = 3000;
+    public static double kT7 = 3000;
+    public static double kT8 = 3000;
+    public static double kT9 = 3000;
+    public static double kT10 = 3000;
+    public static double kT11 = 3000;
+    public static double kT12 = 3000;
+    public static double kT13 = 3000;
+    public static double kT14 = 5000;
+    public static double kT15 = 5000;
+    public static double kT16 = 5000;
+    public static double kT17 = 5000;
+    public static double kT18 = 5000;
+    public static double kT19 = 8000;
+    public static double kT20 = 8000;
+    public static double kT21 = 8000;
+    public static double kT22 = 8000;
+    public static double kT23 = 8000;
+    public static double kT24 = 8000;
+    public static double kT25 = 8000;
     //
     //
     public static double kB26 = 500;

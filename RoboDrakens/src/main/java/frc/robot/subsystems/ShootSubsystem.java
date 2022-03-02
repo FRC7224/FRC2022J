@@ -85,14 +85,14 @@ public class ShootSubsystem extends SubsystemBase {
         shootMotorTop.configFactoryDefault();
         shootMotorTop.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
         shootMotorTop.set(ControlMode.Velocity, 0);
-        shootMotorTop.setInverted(true);
+        shootMotorTop.setInverted(false);
         shootMotorTop.setSensorPhase(true);
 
         /* Config the peak and nominal outputs */
         shootMotorTop.configNominalOutputForward(0, Constants.kTimeoutMs);
         shootMotorTop.configNominalOutputReverse(0, Constants.kTimeoutMs);
-        shootMotorTop.configPeakOutputForward(0, Constants.kTimeoutMs);
-        shootMotorTop.configPeakOutputReverse(100, Constants.kTimeoutMs);
+        shootMotorTop.configPeakOutputForward(100, Constants.kTimeoutMs);
+        shootMotorTop.configPeakOutputReverse(9, Constants.kTimeoutMs);
 
         /* Config the Velocity closed loop gains in slot0 */
         shootMotorTop.config_kF(Constants.kPIDLoopIdx, Constants.kshootTopF, Constants.kTimeoutMs);

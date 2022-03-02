@@ -34,6 +34,7 @@ public class ClimbControl extends CommandBase {
     @Override
     public void initialize() {
         targetPositionRotations = 0;
+        m_climbsubsystem.setclimbrelease(1.0); // full power on iniitalize then use constant
     }
 
     // Called every time the scheduler runs while the command is scheduled.
@@ -44,26 +45,29 @@ public class ClimbControl extends CommandBase {
         /* Gamepad processing */
         double throttlestick = joystick1.getZ();
         SmartDashboard.putNumber("joy1", joystick1.getZ());
-        boolean climbButton = joystick1.getRawButton(Constants.kclimbButton);
-        boolean climbOverButton = joystick1.getRawButton(Constants.kclimboverridebutton);
 
-        /* Deadband gamepad */
-      //  if (Math.abs(throttlestick) < 0.10) {
-      //      /* Within 10% of zero */
-      //      throttlestick = 0;
-    //    }
+        /* climb lock */
+        if (joystick1.getRawButton(Constants.kclimbLock)) {
+            m_climbsubsystem.setclimblock();
+        }
+
+        /* climb lock release */
+        if (joystick1.getRawButton(Constants.kclimbrelease)) {
+            m_climbsubsystem.setclimbrelease(Constants.kclimbreleaseP);
+        }
 
         /**
-         * When button climbButton is pressed, perform Position Closed Loop to selected
-         * position,
-         * indicated by Joystick position x10, [-10, 10] rotations
+         * Climb code
          */
-        if (climbButton) {
+        if (joystick1.getRawButton(Constants.kclimbButton)) {
             /* Position Closed Loop */
 
-            /* 10 Rotations * 4296 u/rev in either direction   * 12 gear ratio */
+            // release lock if locked
+            m_climbsubsystem.setclimbrelease(Constants.kclimbreleaseP);
+
+            /* 10 Rotations * 4296 u/rev in either direction * 12 gear ratio */
             SmartDashboard.putNumber("climb", targetPositionRotations);
-            targetPositionRotations = -throttlestick * 2048 *12 *10; // 2048 set for Falcon encoder
+            targetPositionRotations = -throttlestick * 2048 * 12 * 10; // 2048 set for Falcon encoder
 
             // limit height
             if (targetPositionRotations >= Constants.kMaxClimbHeight) {
@@ -71,17 +75,27 @@ public class ClimbControl extends CommandBase {
             }
 
             // limit retun
-           if (targetPositionRotations <= Constants.kMinClimbHeight) {
-               targetPositionRotations = Constants.kMinClimbHeight;
+            if (targetPositionRotations <= Constants.kMinClimbHeight) {
+                targetPositionRotations = Constants.kMinClimbHeight;
             }
 
             m_climbsubsystem.pidClimb(targetPositionRotations);
         }
 
         /* When button climbOverButto is held, just straight drive */
-        if (climbOverButton) {
+        if (joystick1.getRawButton(Constants.kclimboverridebutton)) {
+
+            // release lock if locked
+            m_climbsubsystem.setclimbrelease(Constants.kclimbreleaseP);
+
             /* Percent Output */
-            m_climbsubsystem.straightClimb(throttlestick*.5);
+            m_climbsubsystem.straightClimb(throttlestick * 0.5);
+        }
+
+        /* When button climbOverButton is released turn off motor */
+        if (joystick1.getRawButtonReleased(Constants.kclimboverridebutton)) {
+            /* Percent Output */
+            m_climbsubsystem.straightClimb(0);
         }
 
     }

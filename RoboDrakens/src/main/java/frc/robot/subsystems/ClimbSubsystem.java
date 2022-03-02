@@ -14,9 +14,12 @@ import frc.robot.Constants;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+
 import edu.wpi.first.wpilibj.Joystick;
 
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.TalonFXFeedbackDevice;
 
 /**
@@ -26,6 +29,7 @@ public class ClimbSubsystem extends SubsystemBase {
 
     /** Hardware */
     WPI_TalonFX climbMotor = new WPI_TalonFX(Constants.kClimbMotorPort, "rio");
+    WPI_VictorSPX climbLock = new WPI_VictorSPX(Constants.kClimblockPort);
     Joystick _joy = new Joystick(0);
 
     /** Used to create string thoughout loop */
@@ -40,6 +44,9 @@ public class ClimbSubsystem extends SubsystemBase {
      */
 
     public ClimbSubsystem() {
+
+        addChild("Climb Motor", climbMotor);
+        addChild("Climb Lock ", climbLock);
 
         /**
          * Description:
@@ -102,7 +109,6 @@ public class ClimbSubsystem extends SubsystemBase {
         climbMotor.config_kP(Constants.kClimbPIDLoopIdx, Constants.kClimbP, Constants.kClimbTimeoutMs);
         climbMotor.config_kI(Constants.kClimbPIDLoopIdx, Constants.kClimbI, Constants.kClimbTimeoutMs);
         climbMotor.config_kD(Constants.kClimbPIDLoopIdx, Constants.kClimbD, Constants.kClimbTimeoutMs);
-       
 
         /**
          * Grab the 360 degree position of the MagEncoder's absolute
@@ -171,7 +177,16 @@ public class ClimbSubsystem extends SubsystemBase {
         _sb.append("\tpos:");
         _sb.append(climbMotor.getSelectedSensorPosition(0));
         _sb.append("u"); // Native units
+    }
 
+    public void setclimblock() {
+        climbMotor.setNeutralMode(NeutralMode.Brake);
+        climbLock.set(0);
+    }
+
+    public void setclimbrelease(double climbReleasePower) {
+        climbMotor.setNeutralMode(NeutralMode.Coast);
+        climbLock.set(climbReleasePower);
     }
 
     @Override
