@@ -63,7 +63,7 @@ public class ClimbControl extends CommandBase {
 
             /* 10 Rotations * 4296 u/rev in either direction   * 12 gear ratio */
             SmartDashboard.putNumber("climb", targetPositionRotations);
-            targetPositionRotations = -throttlestick * 10.0 * 2048 * 12 ; // 2048 set for Falcon encoder
+            targetPositionRotations = -throttlestick * 2048 *12 *10; // 2048 set for Falcon encoder
 
             // limit height
             if (targetPositionRotations >= Constants.kMaxClimbHeight) {
@@ -81,7 +81,7 @@ public class ClimbControl extends CommandBase {
         /* When button climbOverButto is held, just straight drive */
         if (climbOverButton) {
             /* Percent Output */
-            m_climbsubsystem.straightClimb(throttlestick);
+            m_climbsubsystem.straightClimb(throttlestick*.5);
         }
 
     }

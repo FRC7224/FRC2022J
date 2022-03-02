@@ -25,7 +25,7 @@ import com.ctre.phoenix.motorcontrol.TalonFXFeedbackDevice;
 public class ClimbSubsystem extends SubsystemBase {
 
     /** Hardware */
-    WPI_TalonFX climbMotor = new WPI_TalonFX(Constants.kClimblockPort, "rio");
+    WPI_TalonFX climbMotor = new WPI_TalonFX(Constants.kClimbMotorPort, "rio");
     Joystick _joy = new Joystick(0);
 
     /** Used to create string thoughout loop */

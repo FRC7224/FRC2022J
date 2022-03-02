@@ -27,7 +27,13 @@ public class ShootSubsystem extends SubsystemBase {
 
 
     private WPI_TalonFX shootMotorTop= new WPI_TalonFX(Constants.kShootMotorTopPort,"rio");
-    private WPI_TalonFX shootMotorBottom = new WPI_TalonFX(Constants.kShootMotorBottomPort,"rio");
+   private WPI_TalonFX shootMotorBottom = new WPI_TalonFX(Constants.kShootMotorBottomPort,"rio");
+
+//    private WPI_TalonFX shootMotorTop= new WPI_TalonFX(Constants.kShootMotorBottomPort,"rio");
+ //   private WPI_TalonFX shootMotorBottom = new WPI_TalonFX(Constants.kShootMotorTopPort,"rio");
+
+
+    
     private WPI_VictorSPX elvMotor = new WPI_VictorSPX(Constants.kShootMotorElevatorPort);
     private Solenoid solenoidP = new Solenoid(0, PneumaticsModuleType.CTREPCM, Constants.kPneumaticsShootPush);
     Zone[] zones = {
@@ -85,8 +91,8 @@ public class ShootSubsystem extends SubsystemBase {
         /* Config the peak and nominal outputs */
         shootMotorTop.configNominalOutputForward(0, Constants.kTimeoutMs);
         shootMotorTop.configNominalOutputReverse(0, Constants.kTimeoutMs);
-        shootMotorTop.configPeakOutputForward(100, Constants.kTimeoutMs);
-        shootMotorTop.configPeakOutputReverse(0, Constants.kTimeoutMs);
+        shootMotorTop.configPeakOutputForward(0, Constants.kTimeoutMs);
+        shootMotorTop.configPeakOutputReverse(100, Constants.kTimeoutMs);
 
         /* Config the Velocity closed loop gains in slot0 */
         shootMotorTop.config_kF(Constants.kPIDLoopIdx, Constants.kshootTopF, Constants.kTimeoutMs);
