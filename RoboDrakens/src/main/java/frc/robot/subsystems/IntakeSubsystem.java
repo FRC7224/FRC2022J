@@ -22,10 +22,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  *
  */
 public class IntakeSubsystem extends SubsystemBase {
+   // for debug only 
+  //  private WPI_TalonSRX conveyormotor = new WPI_TalonSRX(Constants.kConveyorMotorPort);
+  //  private WPI_TalonSRX intakemotor = new WPI_TalonSRX(Constants.kIntakeMotorPort);
 
-    private WPI_TalonSRX conveyormotor = new WPI_TalonSRX(Constants.kConveyorMotorPort);
-    private WPI_TalonSRX intakemotor = new WPI_TalonSRX(Constants.kIntakeMotorPort);
-
+  private WPI_VictorSPX conveyormotor = new WPI_VictorSPX(Constants.kConveyorMotorPort);
+  private WPI_VictorSPX intakemotor = new WPI_VictorSPX(Constants.kIntakeMotorPort);
 
     DigitalInput ballLoaded = new DigitalInput(Constants.kballsensorchannel);
     private Solenoid solenoidG = new Solenoid(0, PneumaticsModuleType.CTREPCM, Constants.kPneumaticsShootGate);

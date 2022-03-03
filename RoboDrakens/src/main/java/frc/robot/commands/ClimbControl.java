@@ -22,6 +22,7 @@ public class ClimbControl extends CommandBase {
 
     /** Save the target position to servo to */
     double targetPositionRotations = 0;
+    boolean climblock = false;
 
     public ClimbControl(ClimbSubsystem subsystem) {
 
@@ -34,6 +35,7 @@ public class ClimbControl extends CommandBase {
     @Override
     public void initialize() {
         targetPositionRotations = 0;
+        climblock = false;
         m_climbsubsystem.setclimbrelease(1.0); // full power on iniitalize then use constant
     }
 
@@ -47,23 +49,31 @@ public class ClimbControl extends CommandBase {
         SmartDashboard.putNumber("joy1", joystick1.getZ());
 
         /* climb lock */
-        if (joystick1.getRawButton(Constants.kclimbLock)) {
+        if (joystick1.getRawButtonPressed(Constants.kclimbLock)) {
+            climblock = true;
             m_climbsubsystem.setclimblock();
         }
 
-        /* climb lock release */
-        if (joystick1.getRawButton(Constants.kclimbrelease)) {
-            m_climbsubsystem.setclimbrelease(Constants.kclimbreleaseP);
+        /* climb lock release and refreash */
+        if (joystick1.getRawButtonPressed(Constants.kclimbrelease)) {
+            climblock = false;
+            m_climbsubsystem.setclimbrelease(1.0); // full power when button is initially pressed
+                                                   // Note: using getRawButtonPressed
+        } else {
+            if (climblock == false) { /* climb lock refreash */
+                m_climbsubsystem.setclimbrelease(Constants.kclimbreleaseP); // set refereash power level
+            }
         }
-
+        
+        
         /**
          * Climb code
          */
         if (joystick1.getRawButton(Constants.kclimbButton)) {
             /* Position Closed Loop */
 
-            // release lock if locked
-            m_climbsubsystem.setclimbrelease(Constants.kclimbreleaseP);
+            // release lock 
+            m_climbsubsystem.setclimbrelease(1.0); // Full lock power during climb 
 
             /* 10 Rotations * 4296 u/rev in either direction * 12 gear ratio */
             SmartDashboard.putNumber("climb", targetPositionRotations);
@@ -85,8 +95,8 @@ public class ClimbControl extends CommandBase {
         /* When button climbOverButto is held, just straight drive */
         if (joystick1.getRawButton(Constants.kclimboverridebutton)) {
 
-            // release lock if locked
-            m_climbsubsystem.setclimbrelease(Constants.kclimbreleaseP);
+            // release lock 
+            m_climbsubsystem.setclimbrelease(1.0);  //Full lock power during climb 
 
             /* Percent Output */
             m_climbsubsystem.straightClimb(throttlestick * 0.5);
