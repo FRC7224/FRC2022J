@@ -21,6 +21,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.TalonFXFeedbackDevice;
+import com.ctre.phoenix.motorcontrol.TalonFXSensorCollection;
 
 /**
  *
@@ -161,6 +162,11 @@ public class ClimbSubsystem extends SubsystemBase {
 
         /* Reset built string for next loop */
         _sb.setLength(0);
+
+    }
+    // Resets the Climber to 0 
+    public void resetClimbPosition() {
+        climbMotor.getSensorCollection().setIntegratedSensorPosition(0, Constants.kClimbTimeoutMs);
     }
 
     public void climbMotorOutput() {

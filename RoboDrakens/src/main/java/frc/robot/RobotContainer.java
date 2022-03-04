@@ -38,6 +38,7 @@ public class RobotContainer {
   public final PneumaticsSubsystem m_pneumaticssubsystem = new PneumaticsSubsystem();
   public final ShootSubsystem m_shootsubsystem = new ShootSubsystem();
   public final ClimbSubsystem m_climbsubsystem = new ClimbSubsystem();
+  public final LightSubsystem m_lightsubsystem = new LightSubsystem();
 
   // Joysticks
   private final Joystick joystick1 = new Joystick(0);
@@ -96,6 +97,10 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+
+
+    ////  ****************************************  Move ????????????????????????????????
+    new InstantCommand(m_lightsubsystem::lightOn, m_lightsubsystem);
 
     // Create some buttons
 

@@ -35,6 +35,7 @@ public class ClimbControl extends CommandBase {
     @Override
     public void initialize() {
         targetPositionRotations = 0;
+        m_climbsubsystem.resetClimbPosition();
         climblock = false;
         m_climbsubsystem.setclimbrelease(1.0); // full power on iniitalize then use constant
     }
@@ -104,8 +105,8 @@ public class ClimbControl extends CommandBase {
 
         /* When button climbOverButton is released turn off motor */
         if (joystick1.getRawButtonReleased(Constants.kclimboverridebutton)) {
-            /* Percent Output */
             m_climbsubsystem.straightClimb(0);
+            m_climbsubsystem.resetClimbPosition();  // Resets the new zero position 
         }
 
     }

@@ -26,7 +26,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class ShootSubsystem extends SubsystemBase {
 
 
-    private WPI_TalonFX shootMotorTop= new WPI_TalonFX(Constants.kShootMotorTopPort,"rio");
+   private WPI_TalonFX shootMotorTop= new WPI_TalonFX(Constants.kShootMotorTopPort,"rio");
    private WPI_TalonFX shootMotorBottom = new WPI_TalonFX(Constants.kShootMotorBottomPort,"rio");
 
 //    private WPI_TalonFX shootMotorTop= new WPI_TalonFX(Constants.kShootMotorBottomPort,"rio");

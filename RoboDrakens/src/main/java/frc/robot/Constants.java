@@ -55,10 +55,10 @@ public class Constants {
 
     // Pneumatics
 
-    public static int kPneumaticsShootGate = 0;
-    public static int kPneumaticsShootPush = 1;
-    public static int kPneumaticsIntake = 2;
-    public static int kPneumaticsShift = 3;
+    public static int kPneumaticsShootGate = 2;
+    public static int kPneumaticsShootPush = 3;
+    public static int kPneumaticsIntake = 1;
+    public static int kPneumaticsShift =  0;
 
 
 
@@ -149,7 +149,7 @@ public static Boolean LAUNCHREADY = false;
 
 
     // Intake
-    public static double kIntakeSpeed = 0.3;
+    public static double kIntakeSpeed = -0.3;
     public static double kConveyorSpeed = 0.3;
     public static int kballsensorchannel = 4;
 
