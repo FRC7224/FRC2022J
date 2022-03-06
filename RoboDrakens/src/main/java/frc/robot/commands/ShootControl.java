@@ -81,8 +81,10 @@ public class ShootControl extends CommandBase {
         SmartDashboard.putNumber("Zone", zonePosition);
 
         /// shoot botton is pressed
-        if (joystick1.getRawButton(Constants.kinitShooter) & launchReady & !launchInProgress ) {
+        if (joystick1.getRawButton(Constants.kinitShooter) && launchReady && !launchInProgress ) {
+          
             launchInProgress = true; 
+            SmartDashboard.putBoolean("setting launch readay", launchInProgress);
             timer.start();
             timer.reset();
         }   

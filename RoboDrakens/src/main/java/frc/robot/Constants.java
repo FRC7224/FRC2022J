@@ -93,7 +93,7 @@ public static Boolean LAUNCHREADY = false;
     // Drive Subsystem
 
 
-    public static boolean kenablePID = true;
+    public static boolean kenablePID = false;
 
     public static final int[] kLeftEncoderPorts = new int[] { 2, 3 };
     public static final int[] kRightEncoderPorts = new int[] { 0, 1 };
@@ -110,7 +110,7 @@ public static Boolean LAUNCHREADY = false;
 
     public static final boolean kGyroReversed = false;
 
-    public static final double kTurnP = .1;
+    public static final double kTurnP = .05;
     public static final double kTurnI = 0;
     public static final double kTurnD = 0;
 
@@ -132,8 +132,8 @@ public static Boolean LAUNCHREADY = false;
 
     // Climb
 
-    public static double kMaxClimbHeight = 0 ;
-    public static double kMinClimbHeight = -2450000;
+    public static double kMaxClimbHeight = 151000 ;
+    public static double kMinClimbHeight = 0;
     public static int kClimbTimeoutMs = 30;
     public static double kClimbP = 0.15;
     public static double kClimbI = 0;
@@ -149,8 +149,8 @@ public static Boolean LAUNCHREADY = false;
 
 
     // Intake
-    public static double kIntakeSpeed = -0.3;
-    public static double kConveyorSpeed = 0.3;
+    public static double kIntakeSpeed = -0.7;
+    public static double kConveyorSpeed = -0.4;
     public static int kballsensorchannel = 4;
 
     // Move Ball to shooter
@@ -172,7 +172,7 @@ public static Boolean LAUNCHREADY = false;
     public static double kB11 = 8000;
     public static double kB12 = 8000;
     public static double kB13 = 8000;
-    public static double kB14 = 12500;
+    public static double kB14 = 14000;
     public static double kB15 = 12500;
     public static double kB16 = 12500;
     public static double kB17 = 12500;
@@ -183,7 +183,7 @@ public static Boolean LAUNCHREADY = false;
     public static double kB22 = 25000;
     public static double kB23 = 25000;
     public static double kB24 = 25000;
-    public static double kB25 = 25000;
+    public static double kB25 = 14000;
     public static double kT0 = 3000;
     public static double kT1 = 3000;
     public static double kT2 = 3000;
