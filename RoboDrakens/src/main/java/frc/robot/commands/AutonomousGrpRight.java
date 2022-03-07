@@ -10,7 +10,7 @@ public class AutonomousGrpRight extends SequentialCommandGroup {
      public AutonomousGrpRight(DriveSubsystem subsystem) {
           addCommands(
         //  addParallel(new AutonomousCmdRunIntake());
-        new AutonomousCmdTrajectoryFollowerTwoFixFile(subsystem, "/home/lvuser/Pathleft_1.csv"));
+        new AutonomousCmdTrajectoryFollowerTwoFixFile(subsystem, "/home/lvuser/Pathright_1.csv"));
      }
 
 }

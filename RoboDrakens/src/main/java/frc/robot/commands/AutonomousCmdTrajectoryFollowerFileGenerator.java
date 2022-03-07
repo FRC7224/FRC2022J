@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 
@@ -30,16 +31,19 @@ import jaci.pathfinder.modifiers.TankModifier;
 public class AutonomousCmdTrajectoryFollowerFileGenerator extends CommandBase {
  
   private final DriveSubsystem m_drivesubsystem;
+
  
-  public AutonomousCmdTrajectoryFollowerFileGenerator( DriveSubsystem subsystem,Point startPoint, Point endPoint, String fileName) {
+  public AutonomousCmdTrajectoryFollowerFileGenerator( DriveSubsystem subsystem,Point startPoint, Point endPoint, String fileName ) {
     m_drivesubsystem = subsystem;
     addRequirements(m_drivesubsystem);
+    double inchesToMeter = 0.0254; // times ?
          
     waypoints[0] = new Waypoint(startPoint.X * inchesToMeter, 
       startPoint.Y * inchesToMeter, Math.toRadians(startPoint.D));
     waypoints[1] = new Waypoint(endPoint.X * inchesToMeter, 
       endPoint.Y * inchesToMeter, Math.toRadians(endPoint.D));
     FileName = fileName;
+    
   }
 
     edu.wpi.first.wpilibj.Timer timeout;
@@ -50,10 +54,10 @@ public class AutonomousCmdTrajectoryFollowerFileGenerator extends CommandBase {
     String FileName;
     EncoderFollower left;
     EncoderFollower right;
-    private static double inchesToMeter = 0.0254;
     // This has a max size of three
     Waypoint[] waypoints = new Waypoint[2];
     //private final DriveSubsystem m_drivesubsystem;
+    
    
 
 
@@ -71,6 +75,7 @@ public void initialize() {
 
     timeout = new edu.wpi.first.wpilibj.Timer();
     timeout.start();
+    m_drivesubsystem.resetEncoders();
     m_drivesubsystem.setupDrive();
     m_drivesubsystem.brakemode(true);
     Constants.isTrajectory = true;
@@ -89,6 +94,12 @@ public void initialize() {
     // };
 
     Waypoint[] points = waypoints;
+   // SmartDashboard.putNumber("point 0 x ",points[0].x);
+   // SmartDashboard.putNumber("point 0 y ",points[0].y);
+   // SmartDashboard.putNumber("point 1 x ",points[1].x);
+   // SmartDashboard.putNumber("point 1 y ",points[1].y);
+   // SmartDashboard.putNumber("point 2 x ",points[2].x);
+   // SmartDashboard.putNumber("point 2 y ",points[2].y);
     // SmartDashboard.putNumber("files writer2", 0);
 
     // Trajectory.Config config = new
@@ -109,7 +120,7 @@ public void initialize() {
     // Trajectory.Config(Trajectory.FitMethod.HERMITE_CUBIC,
     // Trajectory.Config.SAMPLES_LOW,0.05, .35, .3, .4);
     Trajectory.Config config = new Trajectory.Config(Trajectory.FitMethod.HERMITE_CUBIC, Trajectory.Config.SAMPLES_LOW,
-        0.05, 1.2, .5, .4);
+        0.05, 8.0, 2.0, 60);
 
     Trajectory trajectory = Pathfinder.generate(points, config);
     File myFile = new File(String.format("/home/lvuser/%s.csv", FileName));
@@ -132,10 +143,10 @@ public void initialize() {
     // 100 is the amount of encoder ticks per full revolution
     // 20 ticks per rev * 5:1 gear ratio = 100
     // Wheel Diameter is the diameter of your wheels (or pulley for a track system)
-    // in meters
+    // in meters was 365
     // 4" * .0254 = .1016
 
-    left.configureEncoder(m_drivesubsystem.getLeftEncoderPosition(), 365, 0.1016);
+    left.configureEncoder(m_drivesubsystem.getLeftEncoderPosition(),365, 0.1016);
     right.configureEncoder(m_drivesubsystem.getRightEncoderPosition(), 365, 0.1016);
 
     // The first argument is the proportional gain. Usually this will be quite high
@@ -184,6 +195,12 @@ public void initialize() {
           double angleDifference = Pathfinder.boundHalfDegrees(desired_heading - gyro_heading);
           double turn = 0.8 * (-1.0 / 80.0) * angleDifference;
           m_drivesubsystem.tankDrive((l + turn), (r - turn));
+          SmartDashboard.putNumber("tra right", r);
+          SmartDashboard.putNumber("tra left", l);
+          SmartDashboard.putNumber("tra turn", turn);
+
+
+
           /*
            * Robot.chassis.tankDrive(-(l + turn),-(r - turn));
            * SmartDashboard.putNumber("tra head", desired_heading);
@@ -191,7 +208,8 @@ public void initialize() {
            * SmartDashboard.putNumber("tra gyro 2", -Robot.chassis.getGyroAngle());
            * SmartDashboard.putNumber("tra right", r);
            * SmartDashboard.putNumber("tra left", l); SmartDashboard.putNumber("Turn",
-           * turn); SmartDashboard.putDouble("tra right", -(r - turn));
+           * turn); 
+           SmartDashboard.putDouble("tra right", -(r - turn));
            * SmartDashboard.putDouble("tra left", -(l + turn));
            * SmartDashboard.putNumber("tra encoder right",
            * Robot.chassis.getRightEncoderPosition());
@@ -207,9 +225,7 @@ public void initialize() {
         // SmartDashboard.putNumber("tra gyro 2", Robot.chassis.getGyroAngle());
         // System.out.println("r "+ r);
         // System.out.println("l "+ l);
-        // SmartDashboard.putNumber("tra encoder right",
-        // Robot.chassis.getRightEncoderPosition());
-        // SmartDashboard.putNumber("tra encodeer left",
+        //m_drivesubsystem.displayDriveData();
         // Robot.chassis.getLeftEncoderPosition());
         // SmartDashboard.putNumber("time lapse", timelapse);
         // System.out.println(" Run specific task at given time." +
@@ -235,7 +251,7 @@ public void execute() {
 
   @Override
   public boolean isFinished() {
-    if (left.isFinished() || right.isFinished() || timeout.get() > 11) {
+    if (left.isFinished() || right.isFinished() || timeout.get() > 30) {
       m_drivesubsystem.resetEncoders();
       return true;
     }

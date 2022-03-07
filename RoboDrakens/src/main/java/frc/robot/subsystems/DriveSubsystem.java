@@ -34,15 +34,15 @@ public class DriveSubsystem extends SubsystemBase {
  //  private WPI_TalonFX temp; // left 2
   
 
-// WPI_TalonFX left1 = new WPI_TalonFX(Constants.kLeftMotor1Port);
-// WPI_TalonFX left2 = new WPI_TalonFX(Constants.kLeftMotor2Port);
-// WPI_TalonFX right1 = new WPI_TalonFX(Constants.kRightMotor1Port);
-// WPI_TalonFX right2 = new WPI_TalonFX(Constants.kRightMotor2Port);
+ WPI_TalonFX left1 = new WPI_TalonFX(Constants.kLeftMotor1Port);
+ WPI_TalonFX left2 = new WPI_TalonFX(Constants.kLeftMotor2Port);
+ WPI_TalonFX right1 = new WPI_TalonFX(Constants.kRightMotor1Port);
+ WPI_TalonFX right2 = new WPI_TalonFX(Constants.kRightMotor2Port);
 
- WPI_TalonSRX left1 = new WPI_TalonSRX(Constants.kLeftMotor1Port);
- WPI_TalonSRX left2 = new WPI_TalonSRX(Constants.kLeftMotor2Port);
- WPI_TalonSRX right1 = new WPI_TalonSRX(Constants.kRightMotor1Port);
- WPI_TalonSRX right2 = new WPI_TalonSRX(Constants.kRightMotor2Port);
+// WPI_TalonSRX left1 = new WPI_TalonSRX(Constants.kLeftMotor1Port);
+// WPI_TalonSRX left2 = new WPI_TalonSRX(Constants.kLeftMotor2Port);
+// WPI_TalonSRX right1 = new WPI_TalonSRX(Constants.kRightMotor1Port);
+// WPI_TalonSRX right2 = new WPI_TalonSRX(Constants.kRightMotor2Port);
  
 
   // The motors on the left side of the drive.
@@ -70,7 +70,7 @@ public class DriveSubsystem extends SubsystemBase {
       Constants.kRightEncoderReversed);
 
   // The gyro sensor
- // private final Gyro m_gyro = new ADXRS450_Gyro();
+  private final Gyro m_gyroOld = new ADXRS450_Gyro();
   public AHRS  m_gyro = new AHRS(SPI.Port.kMXP);
  
 
@@ -249,6 +249,7 @@ public class DriveSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("Left Encoder Raw",getLeftEncoderPosition());
     SmartDashboard.putNumber("Right Encoder Raw",getRightEncoderPosition());;
     SmartDashboard.putNumber("Chassis angle", getHeading());
+    SmartDashboard.putNumber("Gyro old", m_gyroOld.getAngle());
   }
 
 }

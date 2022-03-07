@@ -149,7 +149,7 @@ public static Boolean LAUNCHREADY = false;
 
 
     // Intake
-    public static double kIntakeSpeed = -0.7;
+    public static double kIntakeSpeed = -0.8;
     public static double kConveyorSpeed = -0.4;
     public static int kballsensorchannel = 4;
 
@@ -164,51 +164,51 @@ public static Boolean LAUNCHREADY = false;
     public static double kB3 = 8000;
     public static double kB4 = 8000;
     public static double kB5 = 8000;
-    public static double kB6 = 8000;
-    public static double kB7 = 8000;
-    public static double kB8 = 8000;
-    public static double kB9 = 8000;
-    public static double kB10 = 8000;
-    public static double kB11 = 8000;
-    public static double kB12 = 8000;
-    public static double kB13 = 8000;
-    public static double kB14 = 14000;
-    public static double kB15 = 12500;
-    public static double kB16 = 12500;
-    public static double kB17 = 12500;
-    public static double kB18 = 12500;
-    public static double kB19 = 25000;
-    public static double kB20 = 25000;
-    public static double kB21 = 25000;
-    public static double kB22 = 25000;
-    public static double kB23 = 25000;
-    public static double kB24 = 25000;
-    public static double kB25 = 14000;
-    public static double kT0 = 3000;
+    public static double kB6 = 8500;
+    public static double kB7 = 9000;
+    public static double kB8 = 9500;
+    public static double kB9 = 10000;
+    public static double kB10 = 10500;
+    public static double kB11 = 11000;
+    public static double kB12 = 11500;
+    public static double kB13 = 12000;
+    public static double kB14 = 12500;
+    public static double kB15 = 13000;
+    public static double kB16 = 13500;
+    public static double kB17 = 14000;
+    public static double kB18 = 15000;
+    public static double kB19 = 16000;
+    public static double kB20 = 17000;
+    public static double kB21 = 18000;
+    public static double kB22 = 19000;
+    public static double kB23 = 20000;
+    public static double kB24 = 21000;
+    public static double kB25 = 22000;
+    public static double kT0 = 1000;
     public static double kT1 = 3000;
     public static double kT2 = 3000;
     public static double kT3 = 3000;
     public static double kT4 = 3000;
     public static double kT5 = 3000;
-    public static double kT6 = 3000;
-    public static double kT7 = 3000;
-    public static double kT8 = 3000;
-    public static double kT9 = 3000;
-    public static double kT10 = 3000;
-    public static double kT11 = 3000;
-    public static double kT12 = 3000;
-    public static double kT13 = 3000;
-    public static double kT14 = 5000;
-    public static double kT15 = 5000;
-    public static double kT16 = 5000;
-    public static double kT17 = 5000;
-    public static double kT18 = 5000;
-    public static double kT19 = 8000;
-    public static double kT20 = 8000;
-    public static double kT21 = 8000;
-    public static double kT22 = 8000;
-    public static double kT23 = 8000;
-    public static double kT24 = 8000;
+    public static double kT6 = 3150;
+    public static double kT7 = 3300;
+    public static double kT8 = 3450;
+    public static double kT9 = 3600;
+    public static double kT10 = 3750;
+    public static double kT11 = 3900;
+    public static double kT12 = 4050;
+    public static double kT13 = 4200;
+    public static double kT14 = 4350;
+    public static double kT15 = 4500;
+    public static double kT16 = 4650;
+    public static double kT17 = 4800;
+    public static double kT18 = 5200;
+    public static double kT19 = 5600;
+    public static double kT20 = 6000;
+    public static double kT21 = 6400;
+    public static double kT22 = 6800;
+    public static double kT23 = 7200;
+    public static double kT24 = 7600;
     public static double kT25 = 8000;
     //
     //
@@ -233,5 +233,21 @@ public static Boolean LAUNCHREADY = false;
     public static double kshootBottomI = 0.001;
     public static double kshootBottomD = 20;
     public static double kshootBottomF = 1023.0 / 7200.0;
+
+
+
+   //  New drive to point
+   // These are example values only - NEED to UPDATE
+    // These characterization values MUST be determined either experimentally or theoretically
+    // for *your* robot's drive.
+    // The SysId tool provides a convenient method for obtaining these values for your robot.
+    public static final double ksVolts = 1;
+    public static final double kvVoltSecondsPerMeter = 0.8;
+    public static final double kaVoltSecondsSquaredPerMeter = 0.15;
+
+    public static final double kp = 1;
+
+    public static final double kMaxSpeedMetersPerSecond = 3;
+    public static final double kMaxAccelerationMetersPerSecondSquared = 3;   
 
 }
