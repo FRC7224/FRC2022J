@@ -16,6 +16,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.Encoder;
@@ -32,7 +33,11 @@ public class DriveSubsystem extends SubsystemBase {
   // private WPI_TalonFX right2; // right 2
   // private WPI_TalonFX left1; // left 1
  //  private WPI_TalonFX temp; // left 2
-  
+ 
+ public static Encoder m_rightEncoder = new Encoder(new DigitalInput(0), new DigitalInput(1), false,
+ Encoder.EncodingType.k4X);
+public static Encoder m_leftEncoder = new Encoder(new DigitalInput(2), new DigitalInput(3), true,
+ Encoder.EncodingType.k4X);
 
  WPI_TalonFX left1 = new WPI_TalonFX(Constants.kLeftMotor1Port);
  WPI_TalonFX left2 = new WPI_TalonFX(Constants.kLeftMotor2Port);
@@ -58,16 +63,16 @@ public class DriveSubsystem extends SubsystemBase {
   private final DifferentialDrive m_drive = new DifferentialDrive(m_leftMotors, m_rightMotors);
   
   // The left-side drive encoder
-  private final Encoder m_leftEncoder = new Encoder(
-      Constants.kLeftEncoderPorts[0],
-      Constants.kLeftEncoderPorts[1],
-      Constants.kLeftEncoderReversed);
+ // private final Encoder m_leftEncoder = new Encoder(
+  //    Constants.kLeftEncoderPorts[0],
+ //     Constants.kLeftEncoderPorts[1],
+ //     Constants.kLeftEncoderReversed);
 
   // The right-side drive encoder
-  private final Encoder m_rightEncoder = new Encoder(
-      Constants.kRightEncoderPorts[0],
-      Constants.kRightEncoderPorts[1],
-      Constants.kRightEncoderReversed);
+ //private final Encoder m_rightEncoder = new Encoder(
+ //     Constants.kRightEncoderPorts[0],
+ //     Constants.kRightEncoderPorts[1],
+  //    Constants.kRightEncoderReversed);
 
   // The gyro sensor
   private final Gyro m_gyroOld = new ADXRS450_Gyro();
@@ -85,8 +90,8 @@ public class DriveSubsystem extends SubsystemBase {
 
 
     // Sets the distance per pulse for the encoders
-    m_leftEncoder.setDistancePerPulse(Constants.kEncoderDistancePerPulse);
-    m_rightEncoder.setDistancePerPulse(Constants.kEncoderDistancePerPulse);
+   // m_leftEncoder.setDistancePerPulse(Constants.kEncoderDistancePerPulse);
+  //  m_rightEncoder.setDistancePerPulse(Constants.kEncoderDistancePerPulse);
 
     // Setup live windoww items
     addChild("Left Encoder", m_leftEncoder);
@@ -114,6 +119,11 @@ public class DriveSubsystem extends SubsystemBase {
    * @param right movement
    */
   public void tankDrive(double leftSpeed, double rightSpeed) {
+
+    SmartDashboard.putNumber("tanlkdrive left ", leftSpeed);
+    SmartDashboard.putNumber("tankdrive right",rightSpeed);
+
+
     m_drive.tankDrive(leftSpeed, rightSpeed);
   }
 
@@ -147,7 +157,7 @@ public class DriveSubsystem extends SubsystemBase {
    * @return the raw left drive encoder
    */
   public int getLeftEncoderPosition() {
-    return m_leftEncoder.getRaw();
+   return m_leftEncoder.get();
   }
 
   /**
@@ -165,8 +175,8 @@ public class DriveSubsystem extends SubsystemBase {
    * @return the right drive encoder
    */
   public int getRightEncoderPosition() {
-    return m_rightEncoder.getRaw();
-  }
+   return m_rightEncoder.get();
+  }  
 
   /**
    * Sets the max output of the drive. Useful for scaling the drive to drive more
@@ -251,5 +261,17 @@ public class DriveSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("Chassis angle", getHeading());
     SmartDashboard.putNumber("Gyro old", m_gyroOld.getAngle());
   }
+
+
+  @Override
+  public void periodic() {
+      // This method will be called once per scheduler run
+
+      Constants.rightencoder= getRightEncoderPosition();
+      Constants.leftencoder= getLeftEncoderPosition();
+
+      
+  }
+
 
 }

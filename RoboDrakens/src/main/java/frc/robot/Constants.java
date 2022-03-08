@@ -95,18 +95,18 @@ public static Boolean LAUNCHREADY = false;
 
     public static boolean kenablePID = false;
 
-    public static final int[] kLeftEncoderPorts = new int[] { 2, 3 };
-    public static final int[] kRightEncoderPorts = new int[] { 0, 1 };
-    public static final boolean kLeftEncoderReversed = false;
-    public static final boolean kRightEncoderReversed = true;
+ //   public static final int[] kLeftEncoderPorts = new int[] { 2, 3 };
+ //   public static final int[] kRightEncoderPorts = new int[] { 0, 1 };
+ //   public static final boolean kLeftEncoderReversed = false;
+ //   public static final boolean kRightEncoderReversed = true;
 
-    public static final int kEncoderCPR = 348; // 12.41:1 Gear box, 1:3 encoder ratio, encoder 360 CPR
+   // public static final int kEncoderCPR = 348; // 12.41:1 Gear box, 1:3 encoder ratio, encoder 360 CPR
                                                // Ratio A 12.41 Ratio B 5.45
                                                // 360/12.41 * 3 * 4 =
-    public static final double kWheelDiameterInches = 4;
-    public static final double kEncoderDistancePerPulse =
+ //   public static final double kWheelDiameterInches = 4;
+ //   public static final double kEncoderDistancePerPulse =
             // Assumes the encoders are directly mounted on the wheel shafts
-            (kWheelDiameterInches * Math.PI) / (double) kEncoderCPR;
+  //          (kWheelDiameterInches * Math.PI) / (double) kEncoderCPR;
 
     public static final boolean kGyroReversed = false;
 
@@ -233,6 +233,8 @@ public static Boolean LAUNCHREADY = false;
     public static double kshootBottomI = 0.001;
     public static double kshootBottomD = 20;
     public static double kshootBottomF = 1023.0 / 7200.0;
+    public static int rightencoder;
+    public static int leftencoder;
 
 
 

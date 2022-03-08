@@ -146,8 +146,8 @@ public void initialize() {
     // in meters was 365
     // 4" * .0254 = .1016
 
-    left.configureEncoder(m_drivesubsystem.getLeftEncoderPosition(),365, 0.1016);
-    right.configureEncoder(m_drivesubsystem.getRightEncoderPosition(),365, 0.1016);
+    left.configureEncoder(Constants.leftencoder,365, 0.1016);
+    right.configureEncoder(Constants.rightencoder,365, 0.1016);
 
     // The first argument is the proportional gain. Usually this will be quite high
     // The second argument is the integral gain. This is unused for motion profiling
@@ -188,8 +188,8 @@ public void initialize() {
         timelapse = edu.wpi.first.wpilibj.Timer.getFPGATimestamp() - lasttime;
         if (!left.isFinished() || !right.isFinished()) {
 
-          double l = left.calculate(m_drivesubsystem.getLeftEncoderPosition());
-          double r = right.calculate(m_drivesubsystem.getRightEncoderPosition());
+          double l = left.calculate(Constants.leftencoder);
+          double r = right.calculate(Constants.rightencoder);
           double gyro_heading = -m_drivesubsystem.getHeading(); // Assuming the gyro is giving a value in degrees
           double desired_heading = Pathfinder.r2d(left.getHeading()); // Should also be in degrees
           double angleDifference = Pathfinder.boundHalfDegrees(desired_heading - gyro_heading);
@@ -198,6 +198,8 @@ public void initialize() {
           SmartDashboard.putNumber("tra right", r);
           SmartDashboard.putNumber("tra left", l);
           SmartDashboard.putNumber("tra turn", turn);
+          SmartDashboard.putNumber("const right",Constants.rightencoder);
+          SmartDashboard.putNumber("const left",Constants.leftencoder);
 
           /*
            * Robot.chassis.tankDrive(-(l + turn),-(r - turn));
