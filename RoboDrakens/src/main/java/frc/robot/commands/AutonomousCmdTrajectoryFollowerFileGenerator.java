@@ -117,10 +117,10 @@ public void initialize() {
     // Max Acceleration: 10 m/s/s
     // Max Jerk: 60 m/s/s/s
     // Trajectory.Config config = new
-    // Trajectory.Config(Trajectory.FitMethod.HERMITE_CUBIC,
+    // Trajectory.Config(Trajectory.FitMethod.HERMITE_CUBIC, 0.05, 1.2, .5, .4);
     // Trajectory.Config.SAMPLES_LOW,0.05, .35, .3, .4);
     Trajectory.Config config = new Trajectory.Config(Trajectory.FitMethod.HERMITE_CUBIC, Trajectory.Config.SAMPLES_LOW,
-        0.05, 8.0, 2.0, 60);
+        0.05, 2.0, .5, .4);
 
     Trajectory trajectory = Pathfinder.generate(points, config);
     File myFile = new File(String.format("/home/lvuser/%s.csv", FileName));
@@ -147,7 +147,7 @@ public void initialize() {
     // 4" * .0254 = .1016
 
     left.configureEncoder(m_drivesubsystem.getLeftEncoderPosition(),365, 0.1016);
-    right.configureEncoder(m_drivesubsystem.getRightEncoderPosition(), 365, 0.1016);
+    right.configureEncoder(m_drivesubsystem.getRightEncoderPosition(),365, 0.1016);
 
     // The first argument is the proportional gain. Usually this will be quite high
     // The second argument is the integral gain. This is unused for motion profiling
@@ -198,8 +198,6 @@ public void initialize() {
           SmartDashboard.putNumber("tra right", r);
           SmartDashboard.putNumber("tra left", l);
           SmartDashboard.putNumber("tra turn", turn);
-
-
 
           /*
            * Robot.chassis.tankDrive(-(l + turn),-(r - turn));

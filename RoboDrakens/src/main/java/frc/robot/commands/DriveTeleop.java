@@ -113,6 +113,12 @@ public class DriveTeleop extends CommandBase
         }
         // End of PID enable loop\
 
+
+        if (joystick1.getRawButtonPressed(Constants.kdrvautobutton)|| joystick1.getRawButtonPressed(Constants.kautobutton)){
+           new TurnToAngleProfiled(turn-10.0, m_drivesubsystem);
+          
+        }
+
     }
 
     @Override

@@ -155,7 +155,7 @@ public static Boolean LAUNCHREADY = false;
 
     // Move Ball to shooter
 
-    public static int kballIntakeTimer_timer = 5;
+    public static int kballIntakeTimer_timer = 10;
 
     // Shooter / Elevator Constants
     public static double kB0 = 8000;
