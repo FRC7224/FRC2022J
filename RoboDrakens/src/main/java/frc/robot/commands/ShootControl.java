@@ -61,7 +61,7 @@ public class ShootControl extends CommandBase {
         // Set Lauch ready status
         if (Constants.LAUNCHREADY) {
             launchReady = true;
-            SmartDashboard.putBoolean("launchReady", launchReady);
+           // SmartDashboard.putBoolean("launchReady", launchReady);
         } ;
     
 
@@ -78,7 +78,7 @@ public class ShootControl extends CommandBase {
         } else {
             buttonDelay = buttonDelay + 1;
         }
-        SmartDashboard.putNumber("Zone", zonePosition);
+       SmartDashboard.putNumber("Zone", zonePosition);
 
         /// shoot botton is pressed
         if (joystick1.getRawButton(Constants.kinitShooter)  && !launchInProgress ) {
@@ -89,8 +89,8 @@ public class ShootControl extends CommandBase {
             timer.reset();
         }   
 
-        SmartDashboard.putNumber("Shoot Timer", timer.get());
-        SmartDashboard.putBoolean("launchInProgress", launchInProgress);
+     //   SmartDashboard.putNumber("Shoot Timer", timer.get());
+     //  SmartDashboard.putBoolean("launchInProgress", launchInProgress);
         if (launchInProgress) {
             if (timer.get() <= Constants.kshooterTimer_spin) {
                 System.out.print("spinup");

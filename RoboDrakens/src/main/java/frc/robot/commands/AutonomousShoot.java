@@ -48,13 +48,13 @@ public class AutonomousShoot extends CommandBase {
         if ( !launchInProgress ) {
           
             launchInProgress = true; 
-            SmartDashboard.putBoolean("setting launch readay", launchInProgress);
+     //       SmartDashboard.putBoolean("setting launch readay", launchInProgress);
             timer.start();
             timer.reset();
         }   
 
-        SmartDashboard.putNumber("Shoot Timer", timer.get());
-        SmartDashboard.putBoolean("launchInProgress", launchInProgress);
+   //     SmartDashboard.putNumber("Shoot Timer", timer.get());
+   //     SmartDashboard.putBoolean("launchInProgress", launchInProgress);
         if (launchInProgress) {
             if (timer.get() <= Constants.kshooterTimer_spin) {
                 System.out.print("spinup");

@@ -54,7 +54,7 @@ public class RobotContainer {
     // Smartdashboard Subsystems
 
     // SmartDashboard Buttons
-    SmartDashboard.putData("Autonomous Command", new AutonomousCommand());
+    //SmartDashboard.putData("Autonomous Command", new AutonomousCommand());
     // SmartDashboard.putData("IntakeAction", new IntakeAction( m_intake ));
     // SmartDashboard.putData("PneumaticsControl", new PneumaticsControl(m_pneumatics));
     // SmartDashboard.putData("ShifterControl", new ShifterControl(m_shifter));

@@ -14,7 +14,8 @@ public class AutonomousGrpLeft extends SequentialCommandGroup {
         addCommands(
                 new AutonomousShoot(shootsubsystem, 10),
                 new ParallelCommandGroup(
-                        new AutonomousCmdTrajectoryFollowerTwoFixFile(drivesubsystem, "/home/lvuser/Pathleft_1.csv"),
+                      //  new AutonomousCmdTrajectoryFollowerTwoFixFile(drivesubsystem, "/home/lvuser/Pathleft_1.csv"),
+                         new AutonomousSimpleDrive(drivesubsystem),
                         new AutonomousIntakeBall(intakesubsystem)),
                 new AutonomousShoot(shootsubsystem, 15));
 

@@ -150,7 +150,7 @@ public static Boolean LAUNCHREADY = false;
 
 
     // Intake
-    public static double kIntakeSpeed = -1.0;
+    public static double kIntakeSpeed = -0.6;
     public static double kConveyorSpeed = -0.4;
     public static int kballsensorchannel = 4;
 

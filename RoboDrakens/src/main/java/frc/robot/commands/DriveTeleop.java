@@ -102,13 +102,13 @@ public class DriveTeleop extends CommandBase
                 firstpassturning = true;
                 // Reset angle
             }
-            m_drivesubsystem.displayDriveData();  
+           // m_drivesubsystem.displayDriveData();  
             m_drivesubsystem.arcadeDrive(forward, turn); // PID controlled Drive
         } // End of BasicDrive PID Control
           // ELSE PID is Off
         else { // use standard arcadeDrive
                // * PID off mode *****
-             m_drivesubsystem.displayDriveData();
+          //   m_drivesubsystem.displayDriveData();
             m_drivesubsystem.arcadeDrive(forward, turn);
         }
         // End of PID enable loop\

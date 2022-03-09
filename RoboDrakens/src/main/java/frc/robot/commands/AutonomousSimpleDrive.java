@@ -44,7 +44,7 @@ public class AutonomousSimpleDrive extends CommandBase {
         drivecomplete = false;
         double timetorun = 3.0;
          if (timer.get() <= timetorun) {
-             SmartDashboard.putNumber("simple run time" , timer.get());
+       //      SmartDashboard.putNumber("simple run time" , timer.get());
              m_drivesubsystem.arcadeDrive(0.4, 0);
 
          }else {

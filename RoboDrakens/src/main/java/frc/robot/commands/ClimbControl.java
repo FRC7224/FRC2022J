@@ -47,7 +47,7 @@ public class ClimbControl extends CommandBase {
 
         /* Gamepad processing */
         double throttlestick = joystick1.getZ();
-        SmartDashboard.putNumber("joy1", joystick1.getZ());
+  //      SmartDashboard.putNumber("joy1", joystick1.getZ());
 
         /* climb lock */
         if (joystick1.getRawButtonPressed(Constants.kclimbLock)) {
@@ -77,7 +77,7 @@ public class ClimbControl extends CommandBase {
             m_climbsubsystem.setclimbrelease(1.0); // Full lock power during climb 
 
             /* 10 Rotations * 4296 u/rev in either direction * 12 gear ratio */
-            SmartDashboard.putNumber("climb", targetPositionRotations);
+     //       SmartDashboard.putNumber("climb", targetPositionRotations);
             targetPositionRotations = -throttlestick * 2048 * 12 * 10; // 2048 set for Falcon encoder
 
             // limit height

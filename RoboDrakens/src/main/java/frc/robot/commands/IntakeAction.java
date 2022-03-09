@@ -41,7 +41,7 @@ public class IntakeAction extends CommandBase {
         boolean ballloaded;
         ballloaded = m_intakesubsystem.getballLoadstatus();
 
-        SmartDashboard.putNumber("intakeeee running", Constants.kIntakeSpeed);
+    //    SmartDashboard.putNumber("intakeeee running", Constants.kIntakeSpeed);
         Joystick joystick1 = new Joystick(0);
         if (joystick1.getRawButton(Constants.kintakebutton)) { // Robot intake
             m_intakesubsystem.lowerIntake();
