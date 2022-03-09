@@ -9,9 +9,11 @@ public class AutonomousGrpFileGenerator extends  SequentialCommandGroup {
 
      public AutonomousGrpFileGenerator(DriveSubsystem subsystem) {
           addCommands(
-     new AutonomousCmdTrajectoryFollowerFileGenerator(subsystem, new Point(0, 0, 0), new Point(45, 0, 0), "Pathleft_1"));
-  //  new AutonomousCmdTrajectoryFollowerFileGenerator(subsystem, new Point(0, 0, 0), new Point(37.5,37.5, 45), "Pathcenter_1"));
-    //  new AutonomousCmdTrajectoryFollowerFileGenerator(subsystem, new Point(0, 0, 0), new Point(41, 0, 0), "Pathright_1"));
+               new AutonomousSimpleDrive(subsystem)
+  //  new AutonomousCmdTrajectoryFollowerFileGenerator(subsystem, new Point(-45, 0, 0), new Point(0, 0, 0), "Pathleft_1")
+ //    new AutonomousCmdTrajectoryFollowerFileGenerator(subsystem, new Point(0, 0, 0), new Point(37.5,37.5, 45), "Pathcenter_1"),
+     //new AutonomousCmdTrajectoryFollowerFileGenerator(subsystem, new Point(0, 0, 0), new Point(41, 0, 0), "Pathright_1")
+     );
      }
 
 }

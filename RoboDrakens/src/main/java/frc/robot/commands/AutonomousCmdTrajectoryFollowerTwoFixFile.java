@@ -167,8 +167,8 @@ public void initialize() {
 
         public void run() {
           if (!left.isFinished() || !right.isFinished()) {
-            l = left.calculate(m_drivesubsystem.getLeftEncoderPosition());
-            r = right.calculate(m_drivesubsystem.getRightEncoderPosition());
+            l = left.calculate(Constants.leftencoder);
+            r = right.calculate(Constants.rightencoder);
             double desired_heading = Pathfinder.r2d(left.getHeading()); // Should also be in degrees
             double angleDifference = Pathfinder.boundHalfDegrees(desired_heading - gyro_heading);
             double turn = 0.8 * (-1.0 / 80.0) * angleDifference;
@@ -178,8 +178,8 @@ public void initialize() {
             SmartDashboard.putNumber("tra head", desired_heading);
             SmartDashboard.putNumber("tra angle Difference", angleDifference);
             SmartDashboard.putNumber("tra gyro ", m_drivesubsystem.getHeading());
-            SmartDashboard.putNumber("tra encoder right", m_drivesubsystem.getRightEncoderPosition());
-            SmartDashboard.putNumber("tra encodeer left", m_drivesubsystem.getLeftEncoderPosition());
+            SmartDashboard.putNumber("tra encoder right", Constants.rightencoder);
+            SmartDashboard.putNumber("tra encodeer left", Constants.leftencoder);
 
           } else {
             m_drivesubsystem.tankDrive(0, 0);

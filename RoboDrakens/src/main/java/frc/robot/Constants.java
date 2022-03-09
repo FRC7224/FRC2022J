@@ -77,8 +77,9 @@ public class Constants {
     public static int kinitShooter = 8;
     public static int kautobutton = 9;
     public static int kclimbButton = 10;
-    public static int kclimbLock = 11;
-    public static int kclimbrelease = 12;
+    public static int kclimbrelease = 11;
+    public static int kclimbLock = 12;
+  
 
 /***
  * 
@@ -149,7 +150,7 @@ public static Boolean LAUNCHREADY = false;
 
 
     // Intake
-    public static double kIntakeSpeed = -0.8;
+    public static double kIntakeSpeed = -1.0;
     public static double kConveyorSpeed = -0.4;
     public static int kballsensorchannel = 4;
 

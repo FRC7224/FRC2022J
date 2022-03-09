@@ -36,7 +36,7 @@ public class DriveSubsystem extends SubsystemBase {
  
  public static Encoder m_rightEncoder = new Encoder(new DigitalInput(0), new DigitalInput(1), false,
  Encoder.EncodingType.k4X);
-public static Encoder m_leftEncoder = new Encoder(new DigitalInput(2), new DigitalInput(3), true,
+public static Encoder m_leftEncoder = new Encoder(new DigitalInput(2), new DigitalInput(3) ,true,
  Encoder.EncodingType.k4X);
 
  WPI_TalonFX left1 = new WPI_TalonFX(Constants.kLeftMotor1Port);

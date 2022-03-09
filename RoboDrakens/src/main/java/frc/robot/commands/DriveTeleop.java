@@ -115,7 +115,7 @@ public class DriveTeleop extends CommandBase
 
 
         if (joystick1.getRawButtonPressed(Constants.kdrvautobutton)|| joystick1.getRawButtonPressed(Constants.kautobutton)){
-           new TurnToAngleProfiled(turn-10.0, m_drivesubsystem);
+           new TurnToAngleProfiled(turn-45.0, m_drivesubsystem);
           
         }
 

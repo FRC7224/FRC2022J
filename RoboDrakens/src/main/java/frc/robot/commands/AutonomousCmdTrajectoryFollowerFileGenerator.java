@@ -7,10 +7,8 @@
 
 package frc.robot.commands;
 
-
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-
 
 import frc.robot.subsystems.DriveSubsystem;
 import java.io.File;
@@ -24,47 +22,41 @@ import jaci.pathfinder.Waypoint;
 import jaci.pathfinder.followers.EncoderFollower;
 import jaci.pathfinder.modifiers.TankModifier;
 
-
 /**
  *
  */
 public class AutonomousCmdTrajectoryFollowerFileGenerator extends CommandBase {
- 
+
   private final DriveSubsystem m_drivesubsystem;
 
- 
-  public AutonomousCmdTrajectoryFollowerFileGenerator( DriveSubsystem subsystem,Point startPoint, Point endPoint, String fileName ) {
+  public AutonomousCmdTrajectoryFollowerFileGenerator(DriveSubsystem subsystem, Point startPoint, Point endPoint,
+      String fileName) {
     m_drivesubsystem = subsystem;
     addRequirements(m_drivesubsystem);
     double inchesToMeter = 0.0254; // times ?
-         
-    waypoints[0] = new Waypoint(startPoint.X * inchesToMeter, 
-      startPoint.Y * inchesToMeter, Math.toRadians(startPoint.D));
-    waypoints[1] = new Waypoint(endPoint.X * inchesToMeter, 
-      endPoint.Y * inchesToMeter, Math.toRadians(endPoint.D));
+
+    waypoints[0] = new Waypoint(startPoint.X * inchesToMeter,
+        startPoint.Y * inchesToMeter, Math.toRadians(startPoint.D));
+    waypoints[1] = new Waypoint(endPoint.X * inchesToMeter,
+        endPoint.Y * inchesToMeter, Math.toRadians(endPoint.D));
     FileName = fileName;
-    
+
   }
 
-    edu.wpi.first.wpilibj.Timer timeout;
-    Timer t;
-    int gyrowait;
-    double lasttime;
-    double timelapse;
-    String FileName;
-    EncoderFollower left;
-    EncoderFollower right;
-    // This has a max size of three
-    Waypoint[] waypoints = new Waypoint[2];
-    //private final DriveSubsystem m_drivesubsystem;
-    
-   
-
-
-    
+  edu.wpi.first.wpilibj.Timer timeout;
+  Timer t;
+  int gyrowait;
+  double lasttime;
+  double timelapse;
+  String FileName;
+  EncoderFollower left;
+  EncoderFollower right;
+  // This has a max size of three
+  Waypoint[] waypoints = new Waypoint[2];
+  // private final DriveSubsystem m_drivesubsystem;
 
   @Override
-public void initialize() {
+  public void initialize() {
     // SmartDashboard.putNumber("files writer", 0);
     // int startindex = Constants.startPositionChooser;
     // waypoints[0] = new Waypoint (0,0,0);
@@ -94,12 +86,12 @@ public void initialize() {
     // };
 
     Waypoint[] points = waypoints;
-   // SmartDashboard.putNumber("point 0 x ",points[0].x);
-   // SmartDashboard.putNumber("point 0 y ",points[0].y);
-   // SmartDashboard.putNumber("point 1 x ",points[1].x);
-   // SmartDashboard.putNumber("point 1 y ",points[1].y);
-   // SmartDashboard.putNumber("point 2 x ",points[2].x);
-   // SmartDashboard.putNumber("point 2 y ",points[2].y);
+    // SmartDashboard.putNumber("point 0 x ",points[0].x);
+    // SmartDashboard.putNumber("point 0 y ",points[0].y);
+    // SmartDashboard.putNumber("point 1 x ",points[1].x);
+    // SmartDashboard.putNumber("point 1 y ",points[1].y);
+    // SmartDashboard.putNumber("point 2 x ",points[2].x);
+    // SmartDashboard.putNumber("point 2 y ",points[2].y);
     // SmartDashboard.putNumber("files writer2", 0);
 
     // Trajectory.Config config = new
@@ -120,7 +112,7 @@ public void initialize() {
     // Trajectory.Config(Trajectory.FitMethod.HERMITE_CUBIC, 0.05, 1.2, .5, .4);
     // Trajectory.Config.SAMPLES_LOW,0.05, .35, .3, .4);
     Trajectory.Config config = new Trajectory.Config(Trajectory.FitMethod.HERMITE_CUBIC, Trajectory.Config.SAMPLES_LOW,
-        0.05, 2.0, .5, .4);
+        0.05, 1.2, .5, .4);
 
     Trajectory trajectory = Pathfinder.generate(points, config);
     File myFile = new File(String.format("/home/lvuser/%s.csv", FileName));
@@ -146,8 +138,8 @@ public void initialize() {
     // in meters was 365
     // 4" * .0254 = .1016
 
-    left.configureEncoder(Constants.leftencoder,365, 0.1016);
-    right.configureEncoder(Constants.rightencoder,365, 0.1016);
+    left.configureEncoder(Constants.leftencoder, 365, 0.1016);
+    right.configureEncoder(Constants.rightencoder, 365, 0.1016);
 
     // The first argument is the proportional gain. Usually this will be quite high
     // The second argument is the integral gain. This is unused for motion profiling
@@ -184,55 +176,60 @@ public void initialize() {
       ////// End sample setup
 
       public void run() {
-        lasttime = edu.wpi.first.wpilibj.Timer.getFPGATimestamp();
-        timelapse = edu.wpi.first.wpilibj.Timer.getFPGATimestamp() - lasttime;
-        if (!left.isFinished() || !right.isFinished()) {
+        int trencoder, tlencoder;
+        trencoder = Constants.rightencoder;
+        tlencoder = Constants.leftencoder;
 
-          double l = left.calculate(Constants.leftencoder);
-          double r = right.calculate(Constants.rightencoder);
-          double gyro_heading = -m_drivesubsystem.getHeading(); // Assuming the gyro is giving a value in degrees
-          double desired_heading = Pathfinder.r2d(left.getHeading()); // Should also be in degrees
-          double angleDifference = Pathfinder.boundHalfDegrees(desired_heading - gyro_heading);
-          double turn = 0.8 * (-1.0 / 80.0) * angleDifference;
-          m_drivesubsystem.tankDrive((l + turn), (r - turn));
-          SmartDashboard.putNumber("tra right", r);
-          SmartDashboard.putNumber("tra left", l);
-          SmartDashboard.putNumber("tra turn", turn);
-          SmartDashboard.putNumber("const right",Constants.rightencoder);
-          SmartDashboard.putNumber("const left",Constants.leftencoder);
+        if (timeout.get() > 0.5) {
+          lasttime = edu.wpi.first.wpilibj.Timer.getFPGATimestamp();
+          timelapse = edu.wpi.first.wpilibj.Timer.getFPGATimestamp() - lasttime;
+          if (!left.isFinished() || !right.isFinished()) {
 
-          /*
-           * Robot.chassis.tankDrive(-(l + turn),-(r - turn));
-           * SmartDashboard.putNumber("tra head", desired_heading);
-           * SmartDashboard.putNumber("tra angle Difference", angleDifference);
-           * SmartDashboard.putNumber("tra gyro 2", -Robot.chassis.getGyroAngle());
-           * SmartDashboard.putNumber("tra right", r);
-           * SmartDashboard.putNumber("tra left", l); SmartDashboard.putNumber("Turn",
-           * turn); 
-           SmartDashboard.putDouble("tra right", -(r - turn));
-           * SmartDashboard.putDouble("tra left", -(l + turn));
-           * SmartDashboard.putNumber("tra encoder right",
-           * Robot.chassis.getRightEncoderPosition());
-           * SmartDashboard.putNumber("tra encodeer left",
-           * Robot.chassis.getLeftEncoderPosition());
-           */
+            double l = left.calculate(Constants.leftencoder);
+            double r = right.calculate(Constants.rightencoder);
+            double gyro_heading = -m_drivesubsystem.getHeading(); // Assuming the gyro is giving a value in degrees
+            double desired_heading = Pathfinder.r2d(left.getHeading()); // Should also be in degrees
+            double angleDifference = Pathfinder.boundHalfDegrees(desired_heading - gyro_heading);
+            double turn = 0.8 * (-1.0 / 80.0) * angleDifference;
+            m_drivesubsystem.tankDrive((l + turn), (r - turn));
+            SmartDashboard.putNumber("tra right", r);
+            SmartDashboard.putNumber("tra left", l);
+            SmartDashboard.putNumber("tra turn", turn);
+            SmartDashboard.putNumber("const right", trencoder);
+            SmartDashboard.putNumber("const left",  tlencoder );
 
-        } else {
-          m_drivesubsystem.tankDrive(0, 0);
-          left.reset();
-          right.reset();
+            /*
+             * Robot.chassis.tankDrive(-(l + turn),-(r - turn));
+             * SmartDashboard.putNumber("tra head", desired_heading);
+             * SmartDashboard.putNumber("tra angle Difference", angleDifference);
+             * SmartDashboard.putNumber("tra gyro 2", -Robot.chassis.getGyroAngle());
+             * SmartDashboard.putNumber("tra right", r);
+             * SmartDashboard.putNumber("tra left", l); SmartDashboard.putNumber("Turn",
+             * turn);
+             * SmartDashboard.putDouble("tra right", -(r - turn));
+             * SmartDashboard.putDouble("tra left", -(l + turn));
+             * SmartDashboard.putNumber("tra encoder right",
+             * Robot.chassis.getRightEncoderPosition());
+             * SmartDashboard.putNumber("tra encodeer left",
+             * Robot.chassis.getLeftEncoderPosition());
+             */
+
+          } else {
+            m_drivesubsystem.tankDrive(0, 0);
+            left.reset();
+            right.reset();
+          }
+          // SmartDashboard.putNumber("tra gyro 2", Robot.chassis.getGyroAngle());
+          // System.out.println("r "+ r);
+          // System.out.println("l "+ l);
+          // m_drivesubsystem.displayDriveData();
+          // Robot.chassis.getLeftEncoderPosition());
+          // SmartDashboard.putNumber("time lapse", timelapse);
+          // System.out.println(" Run specific task at given time." +
+          // System.currentTimeMillis());
+          // System.out.println(" Total time." + Constants.TrajectorySegments*.05);
         }
-        // SmartDashboard.putNumber("tra gyro 2", Robot.chassis.getGyroAngle());
-        // System.out.println("r "+ r);
-        // System.out.println("l "+ l);
-        //m_drivesubsystem.displayDriveData();
-        // Robot.chassis.getLeftEncoderPosition());
-        // SmartDashboard.putNumber("time lapse", timelapse);
-        // System.out.println(" Run specific task at given time." +
-        // System.currentTimeMillis());
-        // System.out.println(" Total time." + Constants.TrajectorySegments*.05);
       }
-
     }, 0, 50); // end timed task 0 delay, execute every 50 mSec
     left.reset();
     right.reset();
@@ -241,13 +238,9 @@ public void initialize() {
 
   }
 
-
-
   @Override
-public void execute() {
+  public void execute() {
   }
-
-
 
   @Override
   public boolean isFinished() {
@@ -267,13 +260,11 @@ public void execute() {
     m_drivesubsystem.brakemode(false);
   }
 
-        
+  @Override
+  public boolean runsWhenDisabled() {
 
-    @Override
-    public boolean runsWhenDisabled() {
+    return false;
 
-        return false;
-
-    }
+  }
 
 }
