@@ -20,7 +20,7 @@ public class AutonomousShoot extends CommandBase {
 
     private final ShootSubsystem m_shootsubsystem;
     private final Timer timer = new Timer();
-    int zonePosition = 12;
+    int zonePosition = 7;
     int buttonDelay ;
     boolean launchInProgress = false;
     boolean ballshot ;

@@ -150,7 +150,7 @@ public static Boolean LAUNCHREADY = false;
 
 
     // Intake
-    public static double kIntakeSpeed = -0.6;
+    public static double kIntakeSpeed = -0.5;
     public static double kConveyorSpeed = -0.4;
     public static int kballsensorchannel = 4;
 
@@ -159,14 +159,14 @@ public static Boolean LAUNCHREADY = false;
     public static int kballIntakeTimer_timer = 10;
 
     // Shooter / Elevator Constants
-    public static double kB0 = 8000;
-    public static double kB1 = 8000;
-    public static double kB2 = 8000;
-    public static double kB3 = 8000;
-    public static double kB4 = 8000;
-    public static double kB5 = 8000;
-    public static double kB6 = 8500;
-    public static double kB7 = 9000;
+    public static double kB0 = 2000;
+    public static double kB1 = 7000;
+    public static double kB2 = 7000;
+    public static double kB3 = 7000;
+    public static double kB4 = 7000;
+    public static double kB5 = 7000;
+    public static double kB6 = 7000;
+    public static double kB7 = 7000;
     public static double kB8 = 9500;
     public static double kB9 = 10000;
     public static double kB10 = 10500;
@@ -191,8 +191,8 @@ public static Boolean LAUNCHREADY = false;
     public static double kT3 = 3000;
     public static double kT4 = 3000;
     public static double kT5 = 3000;
-    public static double kT6 = 3150;
-    public static double kT7 = 3300;
+    public static double kT6 = 3000;
+    public static double kT7 = 3000;;
     public static double kT8 = 3450;
     public static double kT9 = 3600;
     public static double kT10 = 3750;
