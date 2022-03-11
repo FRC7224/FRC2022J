@@ -22,7 +22,8 @@ public class ClimbControl extends CommandBase {
 
     /** Save the target position to servo to */
     double targetPositionRotations = 0;
-    boolean climblock = false;
+    int maxcount = 40;
+  
 
     public ClimbControl(ClimbSubsystem subsystem) {
 
@@ -34,8 +35,8 @@ public class ClimbControl extends CommandBase {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-        targetPositionRotations = 0;
         m_climbsubsystem.resetClimbPosition();
+        targetPositionRotations = 0;
     }
 
     // Called every time the scheduler runs while the command is scheduled.
@@ -81,11 +82,18 @@ public class ClimbControl extends CommandBase {
 
             /* 10 Rotations * 4296 u/rev in either direction * 12 gear ratio */
 
-            targetPositionRotations = -throttlestick * 2048 * 12 * 13; // 2048 set for Falcon encoder
+            targetPositionRotations = (1-(-throttlestick)) * 2048 * 12 * 13; // 2048 set for Falcon encoder
 
             // limit height
             if (targetPositionRotations >= Constants.kMaxClimbHeightFinal) {
                 targetPositionRotations = Constants.kMaxClimbHeightFinal;
+                if (maxcount <= 0){
+                    maxcount = maxcount -1;
+                } else {
+                    m_climbsubsystem.straightClimb(0);
+                }
+                 
+                m_climbsubsystem.straightClimb(0);
 
             }
 
