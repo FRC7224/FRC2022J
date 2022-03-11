@@ -36,8 +36,6 @@ public class ClimbControl extends CommandBase {
     public void initialize() {
         targetPositionRotations = 0;
         m_climbsubsystem.resetClimbPosition();
-        climblock = false;
-        m_climbsubsystem.setclimbrelease(1.0); // full power on iniitalize then use constant
     }
 
     // Called every time the scheduler runs while the command is scheduled.
@@ -47,66 +45,74 @@ public class ClimbControl extends CommandBase {
 
         /* Gamepad processing */
         double throttlestick = joystick1.getZ();
-  //      SmartDashboard.putNumber("joy1", joystick1.getZ());
+     //   SmartDashboard.putNumber("joy1", joystick1.getZ());
 
-        /* climb lock */
-        if (joystick1.getRawButtonPressed(Constants.kclimbLock)) {
-            climblock = true;
-            m_climbsubsystem.setclimblock();
-        }
-
-        /* climb lock release and refreash */
-        if (joystick1.getRawButtonPressed(Constants.kclimbrelease)) {
-            climblock = false;
-            m_climbsubsystem.setclimbrelease(1.0); // full power when button is initially pressed
-                                                   // Note: using getRawButtonPressed
-        } else {
-            if (climblock == false) { /* climb lock refreash */
-                m_climbsubsystem.setclimbrelease(Constants.kclimbreleaseP); // set refereash power level
-            }
-        }
-        
-        
         /**
          * Climb code
+         * 
+         * 
+         * Initial hook up
          */
-        if (joystick1.getRawButton(Constants.kclimbButton)) {
+        if (joystick1.getRawButton(Constants.kclimbButtonInital)) {
             /* Position Closed Loop */
 
-            // release lock 
-            m_climbsubsystem.setclimbrelease(1.0); // Full lock power during climb 
-
             /* 10 Rotations * 4296 u/rev in either direction * 12 gear ratio */
-     //       SmartDashboard.putNumber("climb", targetPositionRotations);
+
             targetPositionRotations = -throttlestick * 2048 * 12 * 10; // 2048 set for Falcon encoder
 
             // limit height
-            if (targetPositionRotations >= Constants.kMaxClimbHeight) {
-                targetPositionRotations = Constants.kMaxClimbHeight;
+            if (targetPositionRotations >= Constants.kMaxClimbHeightInitial) {
+                targetPositionRotations = Constants.kMaxClimbHeightInitial;
+            }
+
+            // limit retun
+            if (targetPositionRotations <= Constants.kMinClimbHeight) {
+                targetPositionRotations = Constants.kMinClimbHeight;
+
+            }
+        //    SmartDashboard.putNumber("climb initial", targetPositionRotations);
+            m_climbsubsystem.pidClimb(targetPositionRotations);
+        }
+
+        // Climb
+
+        if (joystick1.getRawButton(Constants.kclimbButton)) {
+            /* Position Closed Loop */
+
+            /* 10 Rotations * 4296 u/rev in either direction * 12 gear ratio */
+
+            targetPositionRotations = -throttlestick * 2048 * 12 * 13; // 2048 set for Falcon encoder
+
+            // limit height
+            if (targetPositionRotations >= Constants.kMaxClimbHeightFinal) {
+                targetPositionRotations = Constants.kMaxClimbHeightFinal;
+
             }
 
             // limit retun
             if (targetPositionRotations <= Constants.kMinClimbHeight) {
                 targetPositionRotations = Constants.kMinClimbHeight;
             }
-
+        //    SmartDashboard.putNumber("climb final ", targetPositionRotations);
             m_climbsubsystem.pidClimb(targetPositionRotations);
         }
 
         /* When button climbOverButto is held, just straight drive */
-        if (joystick1.getRawButton(Constants.kclimboverridebutton)) {
-
-            // release lock 
-            m_climbsubsystem.setclimbrelease(1.0);  //Full lock power during climb 
-
+        if (joystick1.getRawButton(Constants.kclimboverridebutton)
+                && joystick1.getRawButton(Constants.kclimbButtonInital)
+                && joystick1.getRawButton(Constants.kclimbButton)) {
             /* Percent Output */
-            m_climbsubsystem.straightClimb(throttlestick * 0.5);
+            if (throttlestick <0 ) {
+                throttlestick = 0;  
+            }
+            m_climbsubsystem.straightClimb(-throttlestick * 0.4);
+            // MUST Reboot after using this
         }
 
         /* When button climbOverButton is released turn off motor */
         if (joystick1.getRawButtonReleased(Constants.kclimboverridebutton)) {
             m_climbsubsystem.straightClimb(0);
-            m_climbsubsystem.resetClimbPosition();  // Resets the new zero position 
+            m_climbsubsystem.resetClimbPosition(); // Resets the new zero position
         }
 
     }

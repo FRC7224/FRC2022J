@@ -73,12 +73,12 @@ public class Constants {
 
     public static int kintakebutton = 5;
     public static int kconveyerbutton = 6;
-    public static int kshortshootbutton = 7;
+  //  public static int kshortshootbutton = 7;
     public static int kinitShooter = 8;
     public static int kautobutton = 9;
     public static int kclimbButton = 10;
-    public static int kclimbrelease = 11;
-    public static int kclimbLock = 12;
+    public static int kclimbButtonInital = 7;
+
   
 
 /***
@@ -132,8 +132,8 @@ public static Boolean LAUNCHREADY = false;
     public static int kencodermode = 0;
 
     // Climb
-
-    public static double kMaxClimbHeight = 151000 ;
+    public static double kMaxClimbHeightInitial = 151000 ;
+    public static double kMaxClimbHeightFinal = 302000 ;
     public static double kMinClimbHeight = 0;
     public static int kClimbTimeoutMs = 30;
     public static double kClimbP = 0.15;

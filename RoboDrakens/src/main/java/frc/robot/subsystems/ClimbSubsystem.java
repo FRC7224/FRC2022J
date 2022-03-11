@@ -17,6 +17,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
@@ -96,7 +97,7 @@ public class ClimbSubsystem extends SubsystemBase {
         climbMotor.configNominalOutputForward(0, Constants.kClimbTimeoutMs);
         climbMotor.configNominalOutputReverse(0, Constants.kClimbTimeoutMs);
         climbMotor.configPeakOutputForward(1, Constants.kClimbTimeoutMs);
-        climbMotor.configPeakOutputReverse(-1, Constants.kClimbTimeoutMs);
+        climbMotor.configPeakOutputReverse(0, Constants.kClimbTimeoutMs);
 
         /**
          * Config the allowable closed-loop error, Closed-Loop output will be
@@ -133,7 +134,10 @@ public class ClimbSubsystem extends SubsystemBase {
     }
 
     public void straightClimb(double output) {
+        SmartDashboard.putNumber("output", output);
+        climbMotor.configFactoryDefault();
         climbMotor.set(ControlMode.PercentOutput, output);
+
     }
 
     public void pidClimb(double targetPositionRotations) {
@@ -185,16 +189,7 @@ public class ClimbSubsystem extends SubsystemBase {
         _sb.append("u"); // Native units
     }
 
-    public void setclimblock() {
-        climbMotor.setNeutralMode(NeutralMode.Brake);
-        climbLock.set(0);
-    }
-
-    public void setclimbrelease(double climbReleasePower) {
-        climbMotor.setNeutralMode(NeutralMode.Coast);
-        climbLock.set(climbReleasePower);
-    }
-
+   
     @Override
     public void periodic() {
         // This method will be called once per scheduler run
