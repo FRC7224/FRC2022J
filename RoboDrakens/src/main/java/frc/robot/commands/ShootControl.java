@@ -23,7 +23,7 @@ public class ShootControl extends CommandBase {
 
     private final ShootSubsystem m_shootsubsystem;
 
-    int zonePosition = 12;
+    int zonePosition = 7;
     int buttonDelay ;
     boolean launchInProgress = false;
 
@@ -68,16 +68,27 @@ public class ShootControl extends CommandBase {
         // If throttle swicth is pressed
         // Change zones
         if (buttonDelay == 5) { // Runs every x loops
-            if ((joystick1.getRawAxis(4) > 0) & (zonePosition < 25)) {
+            if ((joystick1.getRawAxis(4) > 0.8) & (zonePosition < 25)) {
                 zonePosition = zonePosition + 1;
             }
-            if ((joystick1.getRawAxis(4) < 0) & (zonePosition > 0)) {
+            if ((joystick1.getRawAxis(4) < -0.8) & (zonePosition > 0)) {
                 zonePosition = zonePosition - 1;
             }
             buttonDelay = 0;
         } else {
             buttonDelay = buttonDelay + 1;
         }
+
+        if (joystick1.getRawButtonPressed(Constants.kshoot0button)){
+            zonePosition = 0 ; 
+
+        }
+
+        if (joystick1.getRawButtonPressed(Constants.kshoot7button)){
+            zonePosition = 7 ; 
+
+        }
+
        SmartDashboard.putNumber("Zone", zonePosition);
 
         /// shoot botton is pressed

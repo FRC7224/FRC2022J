@@ -78,6 +78,8 @@ public class Constants {
     public static int kautobutton = 9;
     public static int kclimbButton = 10;
     public static int kclimbButtonInital = 7;
+    public static int kshoot0button = 11;
+    public static int kshoot7button = 12;
 
   
 
@@ -132,8 +134,8 @@ public static Boolean LAUNCHREADY = false;
     public static int kencodermode = 0;
 
     // Climb
-    public static double kMaxClimbHeightInitial = 151000 ;
-    public static double kMaxClimbHeightFinal = 302000 ;
+    public static double kMaxClimbHeightInitial = 174000 ;
+    public static double kMaxClimbHeightFinal = 802000 ;
     public static double kMinClimbHeight = 0;
     public static int kClimbTimeoutMs = 30;
     public static double kClimbP = 0.15;
@@ -150,7 +152,7 @@ public static Boolean LAUNCHREADY = false;
 
 
     // Intake
-    public static double kIntakeSpeed = -0.5;
+    public static double kIntakeSpeed = -0.6;
     public static double kConveyorSpeed = -0.4;
     public static int kballsensorchannel = 4;
 
@@ -166,7 +168,7 @@ public static Boolean LAUNCHREADY = false;
     public static double kB4 = 7000;
     public static double kB5 = 7000;
     public static double kB6 = 7000;
-    public static double kB7 = 7000;
+    public static double kB7 = 8500;
     public static double kB8 = 9500;
     public static double kB9 = 10000;
     public static double kB10 = 10500;

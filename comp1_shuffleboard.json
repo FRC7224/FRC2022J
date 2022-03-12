@@ -486,6 +486,26 @@
                   "_title": "DigitalInput[2]/Value",
                   "Colors/Color when true": "#7CFC00FF",
                   "Colors/Color when false": "#8B0000FF"
+                },
+                {
+                  "_type": "PID Controller",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/PIDController[2]",
+                  "_title": "/LiveWindow/Ungrouped/PIDController[2]"
+                },
+                {
+                  "_type": "PID Controller",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/PIDController[5]",
+                  "_title": "/LiveWindow/Ungrouped/PIDController[5]"
+                },
+                {
+                  "_type": "PID Controller",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/PIDController[3]",
+                  "_title": "/LiveWindow/Ungrouped/PIDController[3]"
+                },
+                {
+                  "_type": "PID Controller",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/PIDController[4]",
+                  "_title": "/LiveWindow/Ungrouped/PIDController[4]"
                 }
               ]
             }
@@ -553,9 +573,9 @@
     }
   ],
   "windowGeometry": {
-    "x": 237.0,
-    "y": 12.0,
-    "width": 1491.0,
-    "height": 1016.0
+    "x": 8.800000190734863,
+    "y": 0.0,
+    "width": 1491.199951171875,
+    "height": 881.5999755859375
   }
 }

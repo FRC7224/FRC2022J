@@ -77,12 +77,14 @@ public class RobotContainer {
 
     // Configure autonomous sendable chooser
 
-    m_chooser.setDefaultOption("Do Nothing", new AutonomousCommand());
-    m_chooser.addOption("File Generator", new AutonomousGrpFileGenerator(m_drivesubsystem));
-    m_chooser.addOption("Left Start Position", new AutonomousGrpLeft(m_drivesubsystem,m_shootsubsystem,m_intakesubsystem));
-    m_chooser.addOption("Center Start Position", new AutonomousGrpCenter(m_drivesubsystem,m_shootsubsystem,m_intakesubsystem));
+
+   m_chooser.setDefaultOption("Left Start Position", new AutonomousGrpLeft(m_drivesubsystem,m_shootsubsystem,m_intakesubsystem));
+   m_chooser.addOption("Center Start Position", new AutonomousGrpCenter(m_drivesubsystem,m_shootsubsystem,m_intakesubsystem));
    m_chooser.addOption("Right Start Position", new AutonomousGrpRight(m_drivesubsystem,m_shootsubsystem,m_intakesubsystem));
-     SmartDashboard.putData("Auto Mode", m_chooser);
+   m_chooser.addOption("Do Nothing", new AutonomousCommand());
+   m_chooser.addOption("File Generator", new AutonomousGrpFileGenerator(m_drivesubsystem));  
+   
+   SmartDashboard.putData("Auto Mode", m_chooser);
   }
 
   public static RobotContainer getInstance() {

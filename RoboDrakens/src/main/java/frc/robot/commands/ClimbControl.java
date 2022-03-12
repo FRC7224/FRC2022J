@@ -46,7 +46,7 @@ public class ClimbControl extends CommandBase {
 
         /* Gamepad processing */
         double throttlestick = joystick1.getZ();
-     //   SmartDashboard.putNumber("joy1", joystick1.getZ());
+      // SmartDashboard.putNumber("joy1", joystick1.getZ());
 
         /**
          * Climb code
@@ -82,7 +82,7 @@ public class ClimbControl extends CommandBase {
 
             /* 10 Rotations * 4296 u/rev in either direction * 12 gear ratio */
 
-            targetPositionRotations = (1-(-throttlestick)) * 2048 * 12 * 13; // 2048 set for Falcon encoder
+            targetPositionRotations = -throttlestick * 2048 * 12 * 30; // 2048 set for Falcon encoder
 
             // limit height
             if (targetPositionRotations >= Constants.kMaxClimbHeightFinal) {
@@ -101,7 +101,7 @@ public class ClimbControl extends CommandBase {
             if (targetPositionRotations <= Constants.kMinClimbHeight) {
                 targetPositionRotations = Constants.kMinClimbHeight;
             }
-        //    SmartDashboard.putNumber("climb final ", targetPositionRotations);
+        //  SmartDashboard.putNumber("climb final ", targetPositionRotations);
             m_climbsubsystem.pidClimb(targetPositionRotations);
         }
 
@@ -111,6 +111,7 @@ public class ClimbControl extends CommandBase {
                 && joystick1.getRawButton(Constants.kclimbButton)) {
             /* Percent Output */
             if (throttlestick <0 ) {
+                
                 throttlestick = 0;  
             }
             m_climbsubsystem.straightClimb(-throttlestick * 0.4);

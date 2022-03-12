@@ -17,7 +17,7 @@ public class AutonomousGrpRight extends SequentialCommandGroup {
                          //     new AutonomousCmdTrajectoryFollowerTwoFixFile(drivesubsystem, "/home/lvuser/Pathright_1.csv"),
                               new AutonomousSimpleDrive(drivesubsystem),
                               new AutonomousIntakeBall(intakesubsystem)),
-                    new AutonomousShoot(shootsubsystem, 10));
+                    new AutonomousShoot(shootsubsystem, 12));
 
      }
 }
