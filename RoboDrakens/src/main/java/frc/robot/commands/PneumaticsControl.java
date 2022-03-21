@@ -34,6 +34,7 @@ public class PneumaticsControl extends CommandBase {
     @Override
     public void initialize() {   /// Start the compressor 
         m_pneumaticssubsystem.startCompressor();
+        m_pneumaticssubsystem.startfan();
     }
 
     // Called every time the scheduler runs while the command is scheduled.

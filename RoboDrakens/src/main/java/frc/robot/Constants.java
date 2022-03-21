@@ -44,7 +44,7 @@ public class Constants {
     // Light
     public static int kLightPort = 10;
     // Climb
-    public static int kClimblockPort = 11;
+    public static int kFanPort = 11;
     public static int kClimbMotorPort = 12;
 
 
@@ -64,7 +64,7 @@ public class Constants {
 
 
     // Joystick 1 constants
-    public static double kdeadzone = 0.1; // Deadzone
+    public static double kdeadzone = 0.05; // Deadzone
 
     public static int kshiftbutton = 1;
     public static int kintakeupbutton = 2;
@@ -152,7 +152,7 @@ public static Boolean LAUNCHREADY = false;
 
 
     // Intake
-    public static double kIntakeSpeed = -0.6;
+    public static double kIntakeSpeed = -0.8;
     public static double kConveyorSpeed = -0.4;
     public static int kballsensorchannel = 4;
 

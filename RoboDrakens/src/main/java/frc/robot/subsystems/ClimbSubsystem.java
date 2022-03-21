@@ -31,7 +31,7 @@ public class ClimbSubsystem extends SubsystemBase {
 
     /** Hardware */
     WPI_TalonFX climbMotor = new WPI_TalonFX(Constants.kClimbMotorPort, "rio");
-    WPI_VictorSPX climbLock = new WPI_VictorSPX(Constants.kClimblockPort);
+ 
     Joystick _joy = new Joystick(0);
 
     /** Used to create string thoughout loop */
@@ -48,7 +48,7 @@ public class ClimbSubsystem extends SubsystemBase {
     public ClimbSubsystem() {
 
         addChild("Climb Motor", climbMotor);
-        addChild("Climb Lock ", climbLock);
+
 
         /**
          * Description:

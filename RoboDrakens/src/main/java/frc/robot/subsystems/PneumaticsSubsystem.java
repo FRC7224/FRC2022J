@@ -10,6 +10,10 @@ package frc.robot.subsystems;
 
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
+
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 
@@ -19,6 +23,7 @@ import edu.wpi.first.wpilibj.PneumaticsModuleType;
 public class PneumaticsSubsystem extends SubsystemBase {
 
     private Compressor compressor;
+    WPI_VictorSPX fan = new WPI_VictorSPX(Constants.kFanPort);
 
     /**
     *
@@ -27,6 +32,7 @@ public class PneumaticsSubsystem extends SubsystemBase {
 
         compressor = new Compressor(0, PneumaticsModuleType.CTREPCM);
         addChild("Compressor 1", compressor);
+        addChild("Fan ", fan);
 
     }
 
@@ -38,6 +44,18 @@ public class PneumaticsSubsystem extends SubsystemBase {
         compressor.enabled();
 
     }
+
+    public void stopfan() {
+        fan.set(0);
+    }
+
+    public void startfan() {
+        fan.set(100);
+
+    }
+
+
+
 
     @Override
     public void periodic() {

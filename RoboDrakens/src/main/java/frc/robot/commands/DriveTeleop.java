@@ -58,14 +58,14 @@ public class DriveTeleop extends CommandBase
         double forward = -m_drivesubsystem.deadZone(joystick1.getY()); // forward
         double turn = -m_drivesubsystem.deadZone(joystick1.getX()); // turn
         if (forward >= 0) {
-            forward = forward * forward;
+            forward = forward * forward * forward;
         } else {
-            forward = -(forward * forward);
+            forward = (forward * forward * forward);
         }
         if (turn >= 0) {
-            turn = turn * turn;
+            turn = turn * turn * turn ;
         } else {
-            turn = -(turn * turn);
+            turn = (turn * turn * turn);
         }
         SmartDashboard.putNumber("x", joystick1.getX());
         SmartDashboard.putNumber("y", joystick1.getY());
