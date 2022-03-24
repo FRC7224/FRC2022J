@@ -153,7 +153,7 @@ public static Boolean LAUNCHREADY = false;
 
     // Intake
     public static double kIntakeSpeed = -0.8;
-    public static double kConveyorSpeed = -0.4;
+    public static double kConveyorSpeed = -0.6;
     public static int kballsensorchannel = 4;
 
     // Move Ball to shooter

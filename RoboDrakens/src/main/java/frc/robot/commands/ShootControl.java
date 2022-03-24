@@ -68,10 +68,10 @@ public class ShootControl extends CommandBase {
         // If throttle swicth is pressed
         // Change zones
         if (buttonDelay == 5) { // Runs every x loops
-            if ((joystick1.getRawAxis(4) > 0.8) & (zonePosition < 25)) {
+            if ((joystick1.getRawAxis(4) > 0.9) & (zonePosition < 25)) {
                 zonePosition = zonePosition + 1;
             }
-            if ((joystick1.getRawAxis(4) < -0.8) & (zonePosition > 0)) {
+            if ((joystick1.getRawAxis(4) < -0.9) & (zonePosition > 0)) {
                 zonePosition = zonePosition - 1;
             }
             buttonDelay = 0;
@@ -112,7 +112,7 @@ public class ShootControl extends CommandBase {
                 m_shootsubsystem.setShootSpeed(zonePosition);
                 m_shootsubsystem.setelvSpeed(Constants.kelvspeed);
                 ballshot = true;
-                if (timer.get() <= (Constants.kshooterTimer_timer+ 0.5)){  // 0.5 second before pushing
+                if (timer.get() <= (Constants.kshooterTimer_timer+ 0.75)){  // 0.5 second before pushing
                     m_shootsubsystem.pushBall();
                 }
             } else {
