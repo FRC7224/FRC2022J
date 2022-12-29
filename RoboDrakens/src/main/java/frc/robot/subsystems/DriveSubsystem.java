@@ -13,6 +13,7 @@ import frc.robot.Constants;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
@@ -39,10 +40,10 @@ public class DriveSubsystem extends SubsystemBase {
 public static Encoder m_leftEncoder = new Encoder(new DigitalInput(2), new DigitalInput(3) ,true,
  Encoder.EncodingType.k4X);
 
- WPI_TalonFX left1 = new WPI_TalonFX(Constants.kLeftMotor1Port);
- WPI_TalonFX left2 = new WPI_TalonFX(Constants.kLeftMotor2Port);
- WPI_TalonFX right1 = new WPI_TalonFX(Constants.kRightMotor1Port);
- WPI_TalonFX right2 = new WPI_TalonFX(Constants.kRightMotor2Port);
+ WPI_VictorSPX left1 = new WPI_VictorSPX(Constants.kLeftMotor1Port);
+ WPI_VictorSPX left2 = new WPI_VictorSPX(Constants.kLeftMotor2Port);
+ WPI_VictorSPX right1 = new WPI_VictorSPX(Constants.kRightMotor1Port);
+ WPI_VictorSPX right2 = new WPI_VictorSPX(Constants.kRightMotor2Port);
 
 // WPI_TalonSRX left1 = new WPI_TalonSRX(Constants.kLeftMotor1Port);
 // WPI_TalonSRX left2 = new WPI_TalonSRX(Constants.kLeftMotor2Port);
